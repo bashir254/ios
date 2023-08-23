@@ -1,0 +1,35 @@
+name: Build and Publish iOS App
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: '7.0.x'
+
+    - name: Restore dependencies
+      run: dotnet restore
+
+    - name: Build iOS app
+      run: dotnet build -t:Build -f net7.0 -c Release
+
+    - name: Publish iOS app
+      run: dotnet publish -t:Publish -f net7.0 -c Release -o output-folder
+
+    - name: Install fastlane
+      run: brew install fastlane
+
+    - name: Run fastlane
+      run: fastlane deliver --username ${{ secrets.APPLE_ID }} --password ${{ secrets.APPLE_PASSWORD }} --app_identifier com.example.app --ipa output-folder/MyApp.ipa --skip_screenshots
+  
