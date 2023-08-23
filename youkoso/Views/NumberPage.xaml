@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:media="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="youkoso.Views.NumberPage"
+        Title="تعلم واستمع للأرقام باللغة اليابانية"
+             FlowDirection="RightToLeft"
+             BackgroundColor="White">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label">
+                <Setter Property="FontSize" Value="32" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="TextColor" Value="Black" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <StackLayout Spacing="20" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+        <Label                 Text="استمع وتعلم الأرقام باللغة اليابانية" HorizontalOptions="Center" />
+
+        <CollectionView
+        ItemsSource="{Binding TutorialsList1}"
+                        SelectedItem="{Binding selectedTutorial}"
+                        SelectionMode="Single"
+                        SelectionChanged="OnCollectionViewSelectionChanged">
+
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical" Span="3" />
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+<Frame Padding="10" BorderColor="Gray" BackgroundColor="LightGray" HeightRequest="100">
+                    <Label Text="{Binding Name}" />
+            </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <media:MediaElement
+            x:Name="amedia"
+            ShouldAutoPlay="True"
+            Source="https://www.youtube.com/watch?v=Z7-YIZEFouc" />
+    </StackLayout>
+</ContentPage>

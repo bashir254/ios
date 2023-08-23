@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="youkoso.Views.SchoolPage"
+        Title="التعريف بمدارس اللغة اليابانية والإلتحاق بها"
+             FlowDirection="RightToLeft"
+             BackgroundColor="White">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label">
+                <Setter Property="FontSize" Value="32" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="TextColor" Value="Black" />
+            </Style>
+            <Style TargetType="Button">
+                <Setter Property="FontSize" Value="12" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="BackgroundColor" Value="Black" />
+                <Setter Property="BorderColor" Value="green" />
+                <Setter Property="Opacity" Value="0.7" />
+                <Setter Property="Margin" Value="5" />
+            </Style>
+            <Style TargetType="Editor">
+                <Setter Property="HeightRequest" Value="80" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <StackLayout Spacing="7"
+                 VerticalOptions="Center"
+                 HorizontalOptions="Center">
+
+        <Grid Margin="10,5" HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="320" RowSpacing="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Button Grid.Row="0" Grid.ColumnSpan="10" Text="المزيد عن هذه الخدمة" Command="{Binding LessonsCommand}" />
+
+            <Label Grid.Row="1" Grid.ColumnSpan="10"                 Text="قبل تقديم طلبك حول هذه الخدمة, الرجاء مراجعة التفاصيل الخاصة بهذا الأمر من خلال الزر السابق, ثم قم بكتابة طلبك بالتفصيل ثم النقر على زر الإرسال" />
+
+            <Label Grid.Row="2" Grid.ColumnSpan="10" Text="محتوى الرسالة" />
+            <Editor Grid.Row="3" Grid.ColumnSpan="10" Text="{Binding Text}" x:Name="Editor1" />
+
+            <Button Grid.Row="4" Grid.ColumnSpan="10" Text="إرسال" Command="{Binding SendCommand}" />
+        </Grid>
+
+    </StackLayout>
+
+</ContentPage>

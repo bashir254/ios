@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="youkoso.Views.SignUp"
+        Title="إنشاء حساب جديد"
+             FlowDirection="RightToLeft"
+             BackgroundColor="White">
+
+    <StackLayout Spacing="7"
+                VerticalOptions="Center"
+                HorizontalOptions="Center">
+
+    <Grid Margin="10,5" HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="320" RowSpacing="20">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.1*" />
+            <ColumnDefinition Width="0.1*" />
+            <ColumnDefinition Width="0.1*" />
+            <ColumnDefinition Width="0.1*" />
+            <ColumnDefinition Width="0.1*" />
+            <ColumnDefinition Width="0.1*" />
+            <ColumnDefinition Width="0.1*" />
+            <ColumnDefinition Width="0.1*" />
+            <ColumnDefinition Width="0.1*" />
+            <ColumnDefinition Width="0.1*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+                <Entry Grid.Row="0" Grid.ColumnSpan="10" Text="{Binding Text}" x:Name="txtName" Placeholder="الاسم بالكامل"></Entry>
+                <Entry Grid.Row="1" Grid.ColumnSpan="10" Text="{Binding Text2}" x:Name="txtMail" Placeholder="عنوان البريد الإلكتروني"></Entry>
+                <Entry Grid.Row="2" Grid.ColumnSpan="10" Text="{Binding Text3}" x:Name="txtPass" Placeholder="كلمة المرور" IsPassword="True"></Entry>
+                <Entry Grid.Row="3" Grid.ColumnSpan="10" Text="{Binding Text4}" x:Name="txtPhone" Placeholder="رقم الهاتف"></Entry>
+
+                        <Button Grid.Row="4" Grid.ColumnSpan="10" Text="إرسال" FontAttributes="Bold"
+                FontSize="12" BackgroundColor="Black" BorderColor="green" TextColor="White"
+                                Opacity="0.5"
+                                Command="{Binding Btn1Command}" />
+
+    </Grid>
+
+    </StackLayout>
+
+</ContentPage>

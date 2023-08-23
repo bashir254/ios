@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="youkoso.Views.WordsPage"
+        Title="أشهر الكلمات مقسمة إلى مجموعات"
+             FlowDirection="RightToLeft"
+             BackgroundColor="White">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label">
+                <Setter Property="FontSize" Value="32" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="TextColor" Value="Black" />
+            </Style>
+            <Style TargetType="Button">
+                <Setter Property="FontSize" Value="12" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="BackgroundColor" Value="Black" />
+                <Setter Property="BorderColor" Value="Green" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="Opacity" Value="0.7" />
+                <Setter Property="Margin" Value="5" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <StackLayout Spacing="20" VerticalOptions="Center" HorizontalOptions="Center">
+        <Label Text="أهم وأشهر الكلمات اليابانية مقسمة إلى مجموعات" />
+        <Label Text="الرجاء إختيار أحد الأقسام التالية ثم تعلم واستمع للكلمات اليابانية" />
+
+        <Grid Margin="10,5" HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="320" RowSpacing="20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Button Grid.Row="0" Grid.ColumnSpan="4" Text="كلمات التحايا" Command="{Binding Btn1Command}" />
+            <Button Grid.Row="1" Grid.ColumnSpan="4" Text="كلمات الزمن والوقت" Command="{Binding Btn2Command}" />
+            <Button Grid.Row="2" Grid.ColumnSpan="4" Text="كلمات أفراد الأسرة" Command="{Binding Btn3Command}" />
+            <Button Grid.Row="3" Grid.ColumnSpan="4" Text="كلمات الأسماء والضمائر" Command="{Binding Btn4Command}" />
+            <Button Grid.Row="4" Grid.ColumnSpan="4" Text="كلمات أعضاء الجسم" Command="{Binding Btn5Command}" />
+        </Grid>
+    </StackLayout>
+</ContentPage>

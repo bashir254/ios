@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="youkoso.Views.ServicePage"
+        Title="خدمات أخرى"
+             FlowDirection="RightToLeft"
+             BackgroundColor="White">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Button">
+                <Setter Property="BackgroundColor" Value="Black" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="BorderColor" Value="green" />
+                <Setter Property="FontSize" Value="12" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="Opacity" Value="0.5" />
+            </Style>
+            <Style TargetType="Label">
+                <Setter Property="FontSize" Value="32" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <StackLayout Spacing="7"
+                 VerticalOptions="Center"
+                 HorizontalOptions="Center">
+
+        <Label Text="لمعرفة المزيد وطلب الخدمة، الرجاء إختيار نوع الخدمة من العناصر التالية" />
+
+        <Grid Margin="10,5" HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="320" RowSpacing="20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Button Grid.Row="0" Grid.ColumnSpan="10" Text="التعريف بمدارس اللغة اليابانية وكيفية الإلتحاق بها" 
+                    Command="{Binding SchoolCommand}" />
+
+            <Button Grid.Row="1" Grid.ColumnSpan="10" Text="دروس اللغة اليابانية الخاصة" 
+                    Command="{Binding LessonsCommand}" />
+
+            <Button Grid.Row="2" Grid.ColumnSpan="10" Text="ترجمة النصوص من وإلى اللغة اليابانية" 
+                    Command="{Binding TranslateCommand}" />
+
+            <Button Grid.Row="3" Grid.ColumnSpan="10" Text="إنشاء وكتابة السيرة ذاتية باللغة اليابانية" 
+                    Command="{Binding CvCommand}" />
+
+            <Button Grid.Row="4" Grid.ColumnSpan="10" Text="خدمات السفر والسياحة باليابان" 
+                    Command="{Binding TourCommand}" />
+
+            <Button Grid.Row="5" Grid.ColumnSpan="10" Text="إنشاء وتصميم التطبيقات والمواقع المختلفة" 
+                    Command="{Binding SourceCommand}" />
+
+        </Grid>
+    </StackLayout>
+</ContentPage>

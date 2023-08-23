@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="youkoso.Views.MemberPage"
+        Title="حسابي"
+             FlowDirection="RightToLeft"
+             BackgroundColor="White">
+
+    <StackLayout Spacing="7"
+                VerticalOptions="Center"
+                HorizontalOptions="Center">
+
+    <Grid Margin="10,5" HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="320" RowSpacing="20">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.1*" />
+            <ColumnDefinition Width="0.1*" />
+            <ColumnDefinition Width="0.1*" />
+            <ColumnDefinition Width="0.1*" />
+            <ColumnDefinition Width="0.1*" />
+            <ColumnDefinition Width="0.1*" />
+            <ColumnDefinition Width="0.1*" />
+            <ColumnDefinition Width="0.1*" />
+            <ColumnDefinition Width="0.1*" />
+            <ColumnDefinition Width="0.1*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+            <Label Grid.Row="0" Grid.ColumnSpan="2" x:Name="name1"
+                Text="مرحبا بك عزيزي الزائر"
+                SemanticProperties.HeadingLevel="Level1"
+                FontSize="32"
+                HorizontalOptions="Center" />
+
+                        <Button Grid.Row="1" Grid.ColumnSpan="2" x:Name="btn1" Text="تسجيل الدخول" FontAttributes="Bold"
+                FontSize="12" BackgroundColor="Black" BorderColor="green" TextColor="White"
+                                Opacity="0.5"
+                                Command="{Binding Btn1Command}" />
+
+                        <Button Grid.Row="2" Grid.ColumnSpan="2" x:Name="btn2" Text="تسجيل الخروج" FontAttributes="Bold"
+                FontSize="12" BackgroundColor="Black" BorderColor="green" TextColor="White"
+                                Opacity="0.5"
+                                Command="{Binding Btn2Command}" />
+
+                        <Button Grid.Row="3" Grid.ColumnSpan="2" x:Name="btn3" Text="إنشاء حساب جديد" FontAttributes="Bold"
+                FontSize="12" BackgroundColor="Black" BorderColor="green" TextColor="White"
+                                Opacity="0.5"
+                                Command="{Binding Btn3Command}" />
+
+                        </Grid>
+    </StackLayout>
+
+</ContentPage>

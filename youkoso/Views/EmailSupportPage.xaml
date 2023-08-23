@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="youkoso.Views.EmailSupportPage"
+             xmlns:viewmodels="clr-namespace:youkoso.ViewModels"
+             Title="التواصل معنا وطلب الدعم الفني"
+             FlowDirection="RightToLeft"
+             BackgroundColor="White">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Picker" x:Key="AllPicker">
+                <Setter Property="Title" Value="موضوع الرسالة" />
+                <!-- Additional Setter properties if needed -->
+            </Style>
+            <Style TargetType="StackLayout" x:Key="AllStackLayout">
+                <Setter Property="Orientation" Value="Horizontal" />
+                <Setter Property="Spacing" Value="10" />
+                <!-- Additional Setter properties if needed -->
+            </Style>
+            <Style TargetType="Entry">
+                <Setter Property="Placeholder" Value="موضوع الرسالة" />
+                <Setter Property="VerticalOptions" Value="FillAndExpand" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="IsVisible" Value="{Binding IsBusy}" />
+                <!-- Additional Setter properties if needed -->
+            </Style>
+            <Style TargetType="Editor">
+                <Setter Property="Placeholder" Value="محتوى الرسالة" />
+                <Setter Property="VerticalOptions" Value="FillAndExpand" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <!-- Additional Setter properties if needed -->
+            </Style>
+            <Style TargetType="Button" x:Key="ButtonOutline">
+                <Setter Property="BorderColor" Value="Green" />
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="TextColor" Value="Green" />
+                <!-- Additional Setter properties if needed -->
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Picker Grid.Row="0" Style="{StaticResource AllPicker}" ItemsSource="{Binding SubjectsList}" ItemDisplayBinding="{Binding .}" SelectedItem="{Binding EmailSubject, Mode=TwoWay}">
+            <Picker.Triggers>
+                <DataTrigger TargetType="Picker" Binding="{Binding IsBusy}" Value="True">
+                    <Setter Property="IsVisible" Value="False" />
+                </DataTrigger>
+            </Picker.Triggers>
+        </Picker>
+
+        <Entry Grid.Row="1" Placeholder="عنوان الرسالة" Text="{Binding EmailSubject, Mode=OneWayToSource}" VerticalOptions="FillAndExpand" HorizontalOptions="Center" IsVisible="{Binding IsBusy}" />
+
+        <Editor Grid.Row="2" Placeholder="محتوى الرسالة" Text="{Binding EmailBody, Mode=TwoWay}" VerticalOptions="FillAndExpand" HorizontalOptions="Center" />
+
+        <Button Grid.Row="3" Style="{StaticResource ButtonOutline}" Text="إرسال" Command="{Binding SendEmailCommand}" />
+    </Grid>
+
+</ContentPage>

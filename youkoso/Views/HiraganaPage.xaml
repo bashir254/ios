@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="youkoso.Views.HiraganaPage"
+             xmlns:viewmodels="clr-namespace:youkoso.ViewModels"
+             x:DataType="viewmodels:HiraganaViewModel"
+        Title="تعلم واستمع لمقاطع حروف الهيراغانا"
+             FlowDirection="RightToLeft"
+             BackgroundColor="White">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Button">
+                <Setter Property="FontSize" Value="12" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="BackgroundColor" Value="Black" />
+                <Setter Property="BorderColor" Value="Green" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="Opacity" Value="0.7" />
+                <Setter Property="Margin" Value="5" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <StackLayout Spacing="20" VerticalOptions="Center" HorizontalOptions="Center">
+        <Grid Margin="10,5" HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="320" RowSpacing="20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Button Grid.Row="0" Grid.ColumnSpan="4" Text="مقاطع الحروف الأساسية" Command="{Binding Btn1Command}" />
+            <Button Grid.Row="1" Grid.ColumnSpan="4" Text="مقاطع الحروف مع إضافة النقاط وبعض الرموز الأخرى" Command="{Binding Btn2Command}" />
+            <Button Grid.Row="2" Grid.ColumnSpan="4" Text="مقاطع الحروف مع إضافة الحروف الصغيرة" Command="{Binding Btn3Command}" />
+        </Grid>
+    </StackLayout>
+</ContentPage>

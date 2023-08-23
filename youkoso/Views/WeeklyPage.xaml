@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:media="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="youkoso.Views.WeeklyPage"
+Title="الدروس الأسبوعية لللغة اليابانية"
+             FlowDirection="RightToLeft"
+             BackgroundColor="White">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label">
+                <Setter Property="FontSize" Value="32" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="TextColor" Value="Black" />
+            </Style>
+            <Style TargetType="Button">
+                <Setter Property="FontSize" Value="Medium" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="BackgroundColor" Value="Black" />
+                <Setter Property="BorderColor" Value="Black" />
+                <Setter Property="Opacity" Value="0.7" />
+                <Setter Property="Margin" Value="5" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <StackLayout Margin="20">
+        <Label Text="من خلال هذه الصفحة سوف نقوم بنشر درس واحد صوتي كل أسبوع تقريبا، وسيتم نشر أربعة دروس فقط كحد أقصى وسنقوم بحذف الدرس الأخير كلما نشرنا درسا جديدا" />
+        <Button x:Name="lesson1" Text="الدرس الأول" Command="{Binding Lesson1Command}" />
+        <Button x:Name="lesson2" Text="الدرس الثاني" Command="{Binding Lesson2Command}" />
+        <Button x:Name="lesson3" Text="الدرس الثالث" Command="{Binding Lesson3Command}" />
+        <Button x:Name="lesson4" Text="الدرس الرابع" Command="{Binding Lesson4Command}" />
+
+        <media:MediaElement x:Name="amedia" ShouldAutoPlay="True" Source="https://www.youtube.com/watch?v=Z7-YIZEFouc" />
+    </StackLayout>
+</ContentPage>
