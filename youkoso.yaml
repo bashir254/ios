@@ -19,7 +19,7 @@ jobs:
         dotnet-version: '7.0.x'  # 使用する.NETバージョンを指定
 
     - name: Restore Dependencies
-      run: dotnet restore Path/To/Your/Project.sln  # ソリューションファイルへのパスを指定
+      run: dotnet restore youkoso.sln
 
     - name: Build and Publish iOS App
-      run: dotnet publish Path/To/Your/iOSProject/iOSProject.csproj --configuration Release --output publish
+      run: dotnet publish youkoso/youkoso.csproj --configuration Release --output publish
