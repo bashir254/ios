@@ -19,7 +19,7 @@ jobs:
         dotnet-version: '7.0.x'
 
     - name: Install Maui iOS
-      run: dotnet tool install -d workload
+      run: dotnet workload install maui-ios
 
     - name: Restore Dependencies
       run: dotnet restore youkoso.sln
