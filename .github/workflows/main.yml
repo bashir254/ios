@@ -18,6 +18,9 @@ jobs:
       with:
         dotnet-version: '7.0.x'  # 使用する.NETバージョンを指定
 
+    - name: Install Maui iOS
+      run: dotnet tool install -g Maui.iOS
+
     - name: Restore Dependencies
       run: dotnet restore youkoso.sln
 
