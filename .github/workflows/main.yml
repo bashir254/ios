@@ -11,12 +11,12 @@ jobs:
 
     steps:
     - name: Checkout Repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Setup .NET
       uses: actions/setup-dotnet@v2
       with:
-        dotnet-version: '7.0.x'  # 使用する.NETバージョンを指定
+        dotnet-version: '7.0.x'
 
     - name: Install Maui iOS
       run: dotnet tool install -g Maui.iOS
