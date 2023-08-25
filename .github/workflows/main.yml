@@ -21,6 +21,9 @@ jobs:
     - name: Install Maui iOS
       run: dotnet workload install maui-ios
 
+    - name: Install maccatalyst
+      run: dotnet workload install maccatalyst
+
     - name: Restore Dependencies
       run: dotnet restore youkoso.sln
 
