@@ -27,5 +27,8 @@ jobs:
     - name: Restore Dependencies
       run: dotnet restore youkoso.sln
 
+    - name: Install .NET MAUI Dependencies
+      run: dotnet msbuild /t:Restore youkoso/youkoso.csproj
+
     - name: Build and Publish iOS App
       run: dotnet publish youkoso/youkoso.csproj --configuration Release
