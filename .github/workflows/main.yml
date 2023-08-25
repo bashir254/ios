@@ -36,4 +36,4 @@ jobs:
     - name: Install .NET MAUI Dependencies and Publish iOS App
       run: |
         dotnet msbuild /t:Restore youkoso/youkoso.csproj
-        dotnet publish youkoso/youkoso.csproj --configuration Release --framework net6.0-ios --runtime ios-arm64
+        dotnet publish youkoso/youkoso.csproj --configuration Release --framework net7.0-ios --runtime ios-arm64 --self-contained
