@@ -28,4 +28,4 @@ jobs:
       run: dotnet restore youkoso.sln
 
     - name: Build and Publish iOS App
-      run: dotnet publish youkoso/youkoso.csproj --configuration Release --target net7.0
+      run: dotnet publish youkoso/youkoso.csproj --configuration Release
