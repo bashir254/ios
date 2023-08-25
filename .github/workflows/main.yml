@@ -19,10 +19,7 @@ jobs:
         dotnet-version: '7.0.x'
 
     - name: Install Maui iOS
-      run: dotnet tool install -g Maui.iOS
-
-    - name: Set Maui iOS version
-      run: dotnet tool update -g Maui.iOS --version 3.6.0
+      run: dotnet tool install -g maui-ios --source https://pkgs.dev.azure.com/dotnet/ maui
 
     - name: Restore Dependencies
       run: dotnet restore youkoso.sln
