@@ -27,11 +27,11 @@ jobs:
     - name: Restore Dependencies
       run: dotnet restore youkoso.sln
 
-    - name: Set Environment Variables
+    - name: Set Environment Variables and Publish iOS App
       run: |
-        export APP_STORE_CONNECT_KEY_ID=${{ secrets.APP_STORE_CONNECT_KEY_ID }}
-        export APP_STORE_CONNECT_ISSUER_ID=${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
-        export APP_STORE_CONNECT_KEY=${{ secrets.APP_STORE_CONNECT_KEY }}
+        export APP_STORE_CONNECT_KEY_ID="${{ secrets.APP_STORE_CONNECT_KEY_ID }}"
+        export APP_STORE_CONNECT_ISSUER_ID="${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}"
+        export APP_STORE_CONNECT_KEY="${{ secrets.APP_STORE_CONNECT_KEY }}"
 
     - name: Install .NET MAUI Dependencies and Publish iOS App
       run: |
