@@ -31,4 +31,4 @@ jobs:
       run: dotnet msbuild /t:Restore youkoso/youkoso.csproj
 
     - name: Publish .NET MAUI iOS App
-      run: dotnet publish youkoso/youkoso.csproj --configuration Release --framework net6.0-ios --runtime arm64
+      run: dotnet publish youkoso/youkoso.csproj --configuration Release --framework net6.0-ios --runtime ios-arm64
