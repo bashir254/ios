@@ -11,7 +11,8 @@ namespace youkoso
         {
             var builder = MauiApp.CreateBuilder();
             builder
-.UseMauiApp<App>().UseMauiCommunityToolkit();
+.UseMauiApp<App>()
+.UseMauiCommunityToolkit()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
