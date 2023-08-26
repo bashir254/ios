@@ -11,7 +11,6 @@ namespace youkoso
         {
             var builder = MauiApp.CreateBuilder();
             builder
-								.UseMauiCommunityToolkitMediaElement()
                 .UseMauiApp<App>()
                 .ConfigureFonts(fonts =>
                 {
@@ -20,8 +19,10 @@ namespace youkoso
                 });
 
 #if DEBUG
-		builder.Logging.AddDebug();
+            builder.Logging.AddDebug();
 #endif
+
+            builder.UseMauiCommunityToolkitMediaElement(); // ここにメソッドを追加
 
             return builder.Build();
         }
