@@ -22,21 +22,25 @@ jobs:
       with:
         dotnet-version: '7.0.x'
 
-    - name: Install Maui iOS
-      run: dotnet workload install maui-ios
+      - name: Install .NET MAUI Dependencies
+        run: dotnet workload install maui-ios maccatalyst
 
-    - name: Install maccatalyst
-      run: dotnet workload install maccatalyst
+      - name: Restore Dependencies
+        run: dotnet restore youkoso.sln
 
-    - name: Restore Dependencies
-      run: dotnet restore youkoso.sln
+      - name: Build and Publish iOS App
+        run: |
+          dotnet build youkoso/youkoso.csproj --configuration Release --output ./bin
+          dotnet publish youkoso/youkoso.csproj --configuration Release --output ./bin/publish
 
-    - name: Set Environment Variables and Publish iOS App
-      run: |
-        export APP_STORE_CONNECT_KEY_ID="${{ secrets.APP_STORE_CONNECT_KEY_ID }}"
-        export APP_STORE_CONNECT_ISSUER_ID="${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}"
-        export APP_STORE_CONNECT_KEY="${{ secrets.APP_STORE_CONNECT_KEY }}"
+      - name: Set Environment Variables
+        run: |
+          echo "APP_STORE_CONNECT_KEY_ID=${{ secrets.APP_STORE_CONNECT_KEY_ID }}" >> $GITHUB_ENV
+          echo "APP_STORE_CONNECT_ISSUER_ID=${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}" >> $GITHUB_ENV
+          echo "APP_STORE_CONNECT_KEY=${{ secrets.APP_STORE_CONNECT_KEY }}" >> $GITHUB_ENV
 
-    - name: Install .NET MAUI Dependencies and Publish iOS App
-      run: |
-        dotnet msbuild /t:Restore youkoso/youkoso.csproj
+      - name: Install Transporter
+        run: sudo gem install fastlane
+
+      - name: Upload to App Store Connect
+        run: fastlane deliver --ipa "./bin/publish/youkoso.dll" --username ${{ secrets.APP_STORE_CONNECT_USERNAME }} --verbose
