@@ -14,6 +14,5 @@ jobs:
         with:
           apple-id: ${{ secrets.APPLE_ID }}
           app-id-ios: ${{ secrets.APP_STORE_CONNECT_KEY_ID }}
-          token: ${{ secrets.GITHUB_TOKEN.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 }}
       - run: dotnet build -c Release -t iOS
       - run: dotnet publish -c Release -t iOS -r iOS
