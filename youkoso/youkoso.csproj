@@ -4,7 +4,10 @@
 		<TargetFrameworks>net7.0-ios;net7.0-maccatalyst</TargetFrameworks>
 		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
 		<!-- <TargetFrameworks>$(TargetFrameworks);net7.0-tizen</TargetFrameworks> -->
-		<OutputType>Exe</OutputType>
+    <iOSDeviceFamily>
+      <Device Family="iPhone" />
+      <Device Family="iPad" />
+    </iOSDeviceFamily>
 		<RootNamespace>youkoso</RootNamespace>
 		<UseMaui>true</UseMaui>
 		<SingleProject>true</SingleProject>
