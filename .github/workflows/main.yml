@@ -28,10 +28,17 @@ jobs:
       - name: Restore Dependencies
         run: dotnet restore youkoso.sln
 
-      - name: Build and Publish iOS App
-        run: |
-          dotnet build youkoso/youkoso.csproj --configuration Release --output ./bin
-          dotnet publish youkoso/youkoso.csproj --configuration Release --output ./bin/publish
+      - name: Clean Project
+        run: dotnet clean youkoso/youkoso.csproj
+
+    - name: Install .NET MAUI Dependencies and Publish iOS App
+        run: dotnet msbuild /t:Restore youkoso/youkoso.csproj
+
+      - name: Build Project
+        run: dotnet build youkoso/youkoso.csproj --configuration Release --output ./bin
+
+      - name: Publish iOS App
+        run: dotnet publish youkoso/youkoso.csproj --configuration Release --output ./bin/publish
 
       - name: Set Environment Variables
         run: |
