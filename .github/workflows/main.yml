@@ -18,7 +18,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Setup .NET
-        uses: actions/setup-dotnet@v2
+        uses: actions/setup-dotnet@v2  # Update to latest version
         with:
           dotnet-version: '7.0.x'
 
@@ -31,7 +31,7 @@ jobs:
       - name: Clean Project
         run: dotnet clean youkoso/youkoso.csproj
 
-    - name: Install .NET MAUI Dependencies and Publish iOS App
+      - name: Install .NET MAUI Dependencies and Publish iOS App
         run: dotnet msbuild /t:Restore youkoso/youkoso.csproj
 
       - name: Build Project
