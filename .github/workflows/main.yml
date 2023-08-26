@@ -17,15 +17,26 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Set Default Scheme
-        run: echo "youkoso" > default
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: '7.0.x'
 
-      - name: Build and Test
-        env:
-          scheme: ${{ env.default }}
-          platform: iOS Simulator
-        run: |
-          device=$(xcrun xctrace list devices 2>&1 | grep -oE 'iPhone.*?[^\(]+' | head -1 | awk '{$1=$1;print}' | sed -e "s/ Simulator$//")
-          if [ $scheme = default ]; then scheme=$(cat default); fi
-          xcodebuild build-for-testing -scheme "$scheme" -project "youkoso/youkoso.csproj" -destination "platform=$platform,name=$device"
-          xcodebuild test-without-building -scheme "$scheme" -project "youkoso/youkoso.csproj" -destination "platform=$platform,name=$device"
+    - name: Install Maui iOS
+      run: dotnet workload install maui-ios
+
+    - name: Install maccatalyst
+      run: dotnet workload install maccatalyst
+
+    - name: Restore Dependencies
+      run: dotnet restore youkoso.sln
+
+    - name: Set Environment Variables and Publish iOS App
+      run: |
+        export APP_STORE_CONNECT_KEY_ID="${{ secrets.APP_STORE_CONNECT_KEY_ID }}"
+        export APP_STORE_CONNECT_ISSUER_ID="${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}"
+        export APP_STORE_CONNECT_KEY="${{ secrets.APP_STORE_CONNECT_KEY }}"
+
+    - name: Install .NET MAUI Dependencies and Publish iOS App
+      run: |
+        dotnet msbuild /t:Restore youkoso/youkoso.csproj
