@@ -38,7 +38,7 @@ jobs:
         run: dotnet build youkoso/youkoso.csproj --configuration Release --output ./bin
 
       - name: Publish iOS App
-        run: dotnet publish youkoso/youkoso.csproj --configuration Release --output ./bin/publish
+        run: dotnet publish youkoso/youkoso.csproj --configuration Release --framework net7.0-ios --runtime ios-arm64 --self-contained --output ./bin/publish
 
       - name: Set Environment Variables
         run: |
