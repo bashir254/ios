@@ -88,7 +88,7 @@ await App.Current.MainPage.DisplayAlert("", line, "OK");
 }
 }
 
-public async void write_txt(string text, string fname)
+public void write_txt(string text, string fname)
 {
 using FileStream fs = File.Create(fname);
 using var sr = new StreamWriter(fs);

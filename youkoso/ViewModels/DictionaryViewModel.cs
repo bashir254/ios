@@ -47,17 +47,18 @@ arabic.Add(l2[2].ToString());
 }
 
     [RelayCommand]
-   Task GoBack()
+public Task GoBack()
     {
 if (word_no != 0)
 word_no = (word_no - 1);
 Word1= kana[word_no].ToString() + "\r\n" + kanji[word_no].ToString();
 Word2= arabic[word_no].ToString();
 Settings.Dic_no = word_no;
+    return Task.CompletedTask;
         }
 
     [RelayCommand]
-    async Task GoNext()
+public Task GoNext()
     {
 if (word_no <= (kana.Count - 2))
 word_no = (word_no + 1);
@@ -67,6 +68,7 @@ Word1= kana[word_no].ToString() + "\r\n" + kanji[word_no].ToString();
 Word2= arabic[word_no].ToString();
 //App.Current.MainPage.DisplayAlert("", Word2, "OK");    
 Settings.Dic_no = word_no;
+    return Task.CompletedTask;
         }
 
 }

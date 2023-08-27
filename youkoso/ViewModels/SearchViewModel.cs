@@ -29,7 +29,7 @@ ObservableCollection<Items> Items1 { get; set; }
     {
 if (string.IsNullOrEmpty(Text))
 {   
-App.Current.MainPage.DisplayAlert("رسالة خطأ ", "يجب كتابة كلمة البحث أولا", "OK");    
+    await App.Current.MainPage.DisplayAlert("رسالة خطأ ", "يجب كتابة كلمة البحث أولا", "OK");    
 return;
 }
 Items1.Clear();
@@ -86,7 +86,7 @@ if (indexer == 5000)
         }
         else
         {
-App.Current.MainPage.DisplayAlert("غير موجود ", " لم يتم العثور على كلمة البحث " + Text, "OK");    
+    await App.Current.MainPage.DisplayAlert("غير موجود ", " لم يتم العثور على كلمة البحث " + Text, "OK");    
         }
     }
 
