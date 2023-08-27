@@ -25,7 +25,7 @@ public Hiragana3ViewModel()
 read_characters();
 }
 
-        public async void read_characters()
+        public void read_characters()
         {
 TutorialsList1 = new ObservableCollection<Items>();
 TutorialsList1.Clear();

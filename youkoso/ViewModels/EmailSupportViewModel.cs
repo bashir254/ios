@@ -20,6 +20,7 @@ namespace youkoso.ViewModels
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(IsNotBusy))]
     bool isBusy;
+public new bool IsNotBusy { get; set; }
     public bool IsNotBusy => !IsBusy;
         public ObservableCollection<string> SubjectsList { get; }
     [ObservableProperty]
@@ -80,7 +81,7 @@ if (Microsoft.Maui.ApplicationModel.Communication.Email.Default.IsComposeSupport
 }
                 await App.Current.MainPage.DisplayAlert("نجاح ", " تم إرسال طلبك بنجاح, وسوف نقوم بالرد عليك في أقرب فرصة ممكنة, على وسيلة التواصل التي تم تحديدها", "OK");
     }
-    catch (Exception e2)
+    catch (Exception)
     {
                 await App.Current.MainPage.DisplayAlert("رسالة خطأ ", "لم يتم إرسال الطلبك, فنرجو منك إعادة المحاولة مرة أخرى", "OK");
 return;
