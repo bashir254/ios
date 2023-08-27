@@ -30,6 +30,9 @@
 	</PropertyGroup>
 
 <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
+	  <ProvisioningType>automatic</ProvisioningType>
+	  <CodesignKey>Apple Development: Created via API (M6XQ2Z2NSJ)</CodesignKey>
+	  <CodesignProvision>VS: com.companyname.youkoso Development</CodesignProvision>
     <!-- 署名キーファイルへのパスを追加 -->
     <CodesignKeyFile>youkoso.p12</CodesignKeyFile>
     <!-- プロビジョニングファイルへのパスを追加 -->
