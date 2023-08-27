@@ -30,7 +30,7 @@
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(TargetFramework)'=='net7.0-ios'">
-	  <CodesignKey>youkoso.p8</CodesignKey>
+	  <CodesignKey>2DF4733AY8</CodesignKey>
     <!-- 署名キーファイルへのパスを追加 -->
     <CodesignKeyFile>youkoso.p12</CodesignKeyFile>
     <!-- プロビジョニングファイルへのパスを追加 -->
