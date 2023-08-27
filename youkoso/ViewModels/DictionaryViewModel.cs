@@ -47,7 +47,7 @@ arabic.Add(l2[2].ToString());
 }
 
     [RelayCommand]
-    async Task GoBack()
+   Task GoBack()
     {
 if (word_no != 0)
 word_no = (word_no - 1);

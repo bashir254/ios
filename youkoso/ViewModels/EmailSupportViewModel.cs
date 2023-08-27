@@ -19,7 +19,6 @@ namespace youkoso.ViewModels
     {
     [ObservableProperty]
     bool isBusy;
-    public bool IsNotBusy => !IsBusy;
         public ObservableCollection<string> SubjectsList { get; }
     [ObservableProperty]
         string emailSubject;
@@ -53,7 +52,7 @@ namespace youkoso.ViewModels
         {
 if (string.IsNullOrEmpty(emailBody))
 {   
-App.Current.MainPage.DisplayAlert("رسالة خطأ ", "قبل إرسال الطلب يجب كتابة محتوى الرسالة بالتفاصيل", "OK");    
+await App.Current.MainPage.DisplayAlert("رسالة خطأ ", "قبل إرسال الطلب يجب كتابة محتوى الرسالة بالتفاصيل", "OK");    
 return;
 }
             NetworkAccess current = Connectivity.NetworkAccess;

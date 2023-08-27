@@ -36,7 +36,7 @@ WebViewModel.tutorialUrl = "https://codeuniverse.net/japanese/services/school.ht
     {
 if (string.IsNullOrEmpty(Text))
 {   
-App.Current.MainPage.DisplayAlert("رسالة خطأ ", "قبل إرسال الطلب يجب كتابة محتوى الرسالة بالتفاصيل", "OK");    
+await App.Current.MainPage.DisplayAlert("رسالة خطأ ", "قبل إرسال الطلب يجب كتابة محتوى الرسالة بالتفاصيل", "OK");    
 return;
 }
             NetworkAccess current = Connectivity.NetworkAccess;
