@@ -44,7 +44,6 @@ jobs:
         run: |
           export APP_STORE_CONNECT_KEY_ID=${{ secrets.APP_STORE_CONNECT_KEY_ID }}
           export APP_STORE_CONNECT_ISSUER_ID=${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
-          export APP_STORE_CONNECT_KEY=${{ secrets.APP_STORE_CONNECT_KEY }}
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
