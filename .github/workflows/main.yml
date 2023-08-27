@@ -53,8 +53,12 @@ jobs:
       - name: Install Fastlane
         run: sudo gem install fastlane -NV
 
-      - name: Build and Upload
-        run: fastlane upload_to_app_store
+      - name: Set up Fastlane
+        run: gem install bundler && bundle install
+        working-directory: youkoso
+
+      - name: Run Fastlane
+        run: bundle exec fastlane upload_to_app_store
         env:
           FASTLANE_USERNAME: ${{ secrets.APPLE_ID }}
           FASTLANE_PASSWORD: ${{ secrets.APPLE_PASSWORD }}
