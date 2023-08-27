@@ -36,7 +36,7 @@ jobs:
 
       - name: Build Project
         run:
-          command: dotnet build youkoso/youkoso.csproj --configuration Release --output ./bin /p:CodesignKey="Apple Development: M6XQ2Z2NSJ"
+          command: dotnet build youkoso/youkoso.csproj --configuration Release --output ./bin "/p:CodesignKey=Apple Development: M6XQ2Z2NSJ"
 
       - name: Publish iOS App
         run: dotnet publish youkoso/youkoso.csproj --configuration Release --framework net7.0-ios --runtime ios-arm64 --self-contained --output ./bin/publish
