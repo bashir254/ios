@@ -27,7 +27,7 @@ Word2= arabic[word_no].ToString();
 
 public void read_dic()
 {
-String[] l = dic.dictionary.Split("\r\n");
+String[] l = dic2.dictionary.Split("\r\n");
 kana.Clear();
 kanji.Clear();
 arabic.Clear();
