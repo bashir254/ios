@@ -2,6 +2,21 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+<key>CFBundleIdentifier</key>
+<string>com.companyname.youkoso</string>
+<key>CFBundleURLTypes</key>
+<array>
+    <dict>
+        <key>CFBundleTypeRole</key>
+        <string>Editor</string>
+        <key>CFBundleURLName</key>
+        <string>com.companyname.youkoso</string>
+        <key>CFBundleURLSchemes</key>
+        <array>
+            <string>youkoso</string>  <!-- ここをアプリのスキームに置き換える -->
+        </array>
+    </dict>
+</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UIDeviceFamily</key>

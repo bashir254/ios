@@ -46,8 +46,19 @@ jobs:
           echo "APP_STORE_CONNECT_ISSUER_ID=${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}" >> $GITHUB_ENV
           echo "APP_STORE_CONNECT_KEY=${{ secrets.APP_STORE_CONNECT_KEY }}" >> $GITHUB_ENV
 
-      - name: Install Transporter
-        run: sudo gem install fastlane
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.7
+
+      - name: Install Fastlane
+        run: sudo gem install fastlane -NV
+
+      - name: Build and Upload
+        run: fastlane upload_to_app_store
+        env:
+          FASTLANE_USERNAME: ${{ secrets.APPLE_ID }}
+          FASTLANE_PASSWORD: ${{ secrets.APPLE_PASSWORD }}
 
       - name: Upload to App Store Connect
-        run: fastlane deliver --ipa "./bin/publish/youkoso.dll" --username ${{ secrets.APP_STORE_CONNECT_USERNAME }} --verbose
+        run: fastlane deliver --ipa "./bin/publish/youkoso.dll" --username ${{ secrets.APPLE_ID }} --verbose
