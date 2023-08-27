@@ -18,9 +18,7 @@ namespace youkoso.ViewModels
     public partial class EmailSupportViewModel : BaseViewModel
     {
     [ObservableProperty]
-    [NotifyPropertyChangedFor(nameof(IsNotBusy))]
     bool isBusy;
-public new bool IsNotBusy { get; set; }
     public bool IsNotBusy => !IsBusy;
         public ObservableCollection<string> SubjectsList { get; }
     [ObservableProperty]
