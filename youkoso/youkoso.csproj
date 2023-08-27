@@ -31,6 +31,10 @@
 
 	<PropertyGroup Condition="'$(TargetFramework)'=='net7.0-ios'">
 	  <CodesignKey>Apple Development: Created via API (M6XQ2Z2NSJ)</CodesignKey>
+    <!-- 署名キーファイルへのパスを追加 -->
+    <CodesignKeyFile>youkoso.p12</CodesignKeyFile>
+    <!-- プロビジョニングファイルへのパスを追加 -->
+    <ProvisioningProfile>youkoso.mobileprovision</ProvisioningProfile>
 	  <CodesignProvision>VS: com.companyname.youkoso Development</CodesignProvision>
 	</PropertyGroup>
 
