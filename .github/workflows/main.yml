@@ -41,7 +41,7 @@ jobs:
           KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
         run: |
           # create variables
-          CERTIFICATE_PATH=$RUNNER_TEMP/P12_FILE
+          CERTIFICATE_PATH=$RUNNER_TEMP/P12_FILE.p12
           KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
 
           # import certificate and provisioning profile from secrets
