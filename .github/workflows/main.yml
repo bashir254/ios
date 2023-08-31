@@ -16,7 +16,6 @@ jobs:
     - name: Setup Keystore File
       run: |
         echo "${{ secrets.KEYSTORE_FILE }}" > myapp.keystore.asc
-        base64 -d myapp.keystore.asc > myapp.keystore
         gpg -d --passphrase "${{ secrets.KEYSTORE_PASSWORD_GPG }}" --batch myapp.keystore.asc > myapp.keystore
     - name: Setup .NET
       uses: actions/setup-dotnet@v2
