@@ -1,91 +1,36 @@
-name: iOS Starter Workflow
+name: Build .NET MAUI App Android
 
 on:
   push:
-    branches:
-      - master
+    branches: [ "master" ]
   pull_request:
-    branches:
-      - master
+    branches: [ "master" ]
 
 jobs:
-  build-and-test:
-    name: Build and Test Default Scheme on iPhone Simulator
-    runs-on: macos-latest
+  build:
+
+    runs-on: windows-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: '7.0.x'
-
-      - name: Install .NET MAUI Dependencies
-        run: dotnet workload install maui-ios maccatalyst
-
-      - name: Restore Dependencies
-        run: dotnet restore youkoso.sln
-
-      - name: Clean Project
-        run: dotnet clean youkoso/youkoso.csproj
-
-      - name: Install .NET MAUI Dependencies and Publish iOS App
-        run: dotnet msbuild /t:Restore youkoso/youkoso.csproj
-
-      - name: Install the Apple certificate and provisioning profile
-        env:
-          BUILD_CERTIFICATE_BASE64: ${{ secrets.BUILD_CERTIFICATE_BASE64 }}
-          P12_PASSWORD: ${{ secrets.P12_PASSWORD }}
-          BUILD_PROVISION_PROFILE_BASE64: ${{ secrets.BUILD_PROVISION_PROFILE_BASE64 }}
-          KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
-        run: |
-          # create variables
-          CERTIFICATE_PATH=$RUNNER_TEMP/build_certificate.p12
-          PP_PATH=$RUNNER_TEMP/build_pp.mobileprovision
-          KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
-
-          # import certificate and provisioning profile from secrets
-          echo -n "$BUILD_CERTIFICATE_BASE64" | base64 --decode -o $CERTIFICATE_PATH
-          echo -n "$BUILD_PROVISION_PROFILE_BASE64" | base64 --decode -o $PP_PATH
-
-          # create temporary keychain
-          security create-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
-          security set-keychain-settings -lut 21600 $KEYCHAIN_PATH
-          security unlock-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
-
-          # import certificate to keychain
-          security import $CERTIFICATE_PATH -P "$P12_PASSWORD" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
-          security list-keychain -d user -s $KEYCHAIN_PATH
-
-          # apply provisioning profile
-          mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
-          cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
-
-      - name: Build Project
-        run: dotnet build youkoso/youkoso.csproj --configuration Release --output ./bin
-
-      - name: Publish iOS App
-        run: dotnet publish youkoso/youkoso.csproj --configuration Release --framework net7.0-ios --runtime ios-arm64 --self-contained --output ./bin/publish
-
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: 2.7
-
-      - name: Install Fastlane
-        run: sudo gem install fastlane -NV
-
-      - name: Set up Fastlane
-        run: gem install bundler && bundle install
-        working-directory: youkoso
-
-      - name: Run Fastlane
-        run: bundle exec fastlane upload_to_app_store
-        env:
-          FASTLANE_USERNAME: ${{ secrets.APPLE_ID }}
-          FASTLANE_PASSWORD: ${{ secrets.APPLE_PASSWORD }}
-
-      - name: Upload to App Store Connect
-        run: fastlane deliver --ipa "./bin/publish/youkoso.dll" --username ${{ secrets.APPLE_ID }} --verbose
+    - uses: actions/checkout@v3
+    - name: Setup Keystore File
+      run: |
+        echo "${{ secrets.KEYSTORE_FILE }}" > myapp.keystore.asc
+        base64 -d myapp.keystore.asc > myapp.keystore
+        gpg -d --passphrase "${{ secrets.KEYSTORE_PASSWORD_GPG }}" --batch myapp.keystore.asc > myapp.keystore
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: 7.0.x
+    - name: Install .NET MAUI
+      run: dotnet workload install maui
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build youkoso/youkoso.csproj -c Release -f net6.0-android /p:AndroidSigningKeyStore=myapp.keystore /p:AndroidSigningKeyAlias=ghactionskey /p:AndroidSigningKeyPass="${{ secrets.KEYSTORE_PASSWORD }}" /p:AndroidSigningStorePass="${{ secrets.KEYSTORE_PASSWORD_ALIAS }}" --no-restore
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v3.1.0
+      with:
+        path: |
+          ./**/*.aab
+          ./**/*.apk
