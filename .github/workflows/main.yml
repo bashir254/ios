@@ -1,0 +1,46 @@
+name: Build .NET MAUI Android app
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: 7.0.x
+    - name: Install .NET MAUI
+      run: dotnet workload install maui
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Setup Java
+      uses: actions/setup-java@v3
+      with:
+        distribution: 'adopt'
+        java-version: '20'
+
+    - name: Build Application
+      run: dotnet build -f:net7.0-ios -c:Release
+
+    - name: Build AAB and APK
+      run: |
+        dotnet publish -f:net7.0-android -c:Release /p:AndroidSigningKeyPass=Youkoso /p:AndroidSigningStorePass=Youkoso
+
+    - name: Copy files to bin folder
+      shell: powershell
+      run: |
+        Copy-Item -Path .\youkoso\bin\Release\net7.0-android\publish\* -Destination .\youkoso\bin\ -Recurse  # ビルドされたファイルをコピー
+
+    - name: Publish files as an artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: app-release
+        path: youkoso\bin\  # アーティファクトとしてアップロードするフォルダのパス
