@@ -1,10 +1,4 @@
-Open sidebar
-ビルドiOSプロジェクトの設定
-
-Default (GPT-3.5)
-
-User
-以下の.yamlファイルで.net mauiのiosプロジェクトを実行しようとしていますが、証明書やprovisioningファイルなど.csprojで設定していますので、ネットフレームバージョンの関係でいつもエラーがー発生しますので、完了できない状態ですが、name: Build .NET MAUI Android app
+name: iOS Starter Workflow
 
 on:
   push:
