@@ -25,7 +25,7 @@ jobs:
       run: dotnet restore youkoso.sln
 
     - name: Build iOS App
-      run: dotnet build youkoso/youkoso.csproj -t:Restore,Build -f net7.0
+      run: dotnet build youkoso/youkoso.csproj -f net7.0-ios -c Release 
 
     - name: Sign and Export IPA
       run: |
