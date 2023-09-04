@@ -27,19 +27,8 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
 	</PropertyGroup>
 
-<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|iPhoneSimulator'">
-  <Optimize>False</Optimize>
-  <OutputPath>bin\iPhoneSimulator\Release</OutputPath>
-</PropertyGroup>
-
-<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
-  <CodesignKey>shadia12</CodesignKey>
-  <AppleSigningKeyFile>certificate.p12</AppleSigningKeyFile>
-</PropertyGroup>
-
 	<PropertyGroup Condition="'$(TargetFramework)'=='net7.0-ios15.2'">
 	  <ProvisioningType>automatic</ProvisioningType>
-	  <CodesignProvision>VS: com.companyname.youkoso Development</CodesignProvision>
 	</PropertyGroup>
 
 	<ItemGroup>
