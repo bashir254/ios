@@ -27,13 +27,34 @@ jobs:
     - name: Restore Dependencies
       run: dotnet restore youkoso.sln
 
-    - name: Install Certificate and Provisioning Profile to Keychain
-      run: |
-        security create-keychain -p mysecretpassword build.keychain
-        security import youkoso/certificate.p12 -k ~/Library/Keychains/build.keychain -P "shadia12" -T /usr/bin/codesign
-        security import youkoso/youkoso.mobileprovision -k ~/Library/Keychains/build.keychain -T /usr/bin/codesign
-        security list-keychains -s ~/Library/Keychains/build.keychain
-
     - name: Build iOS App
       run: dotnet build youkoso/youkoso.csproj -f net7.0-ios -c Release 
 
+    - name: Sign and Package
+      run: |
+        # 証明書とプロビジョニングファイルをリポジトリからコピー
+        cp youkoso/certificate.p12 $HOME/.cert.p12
+        cp youkoso/youkoso.mobileprovision $HOME/.mobileprovision.mobileprovision
+
+        # 証明書をキーチェーンにインストール
+        security create-keychain -p mysecretpassword build.keychain
+        security import $HOME/.cert.p12 -k ~/Library/Keychains/build.keychain -P shadia12 -T /usr/bin/codesign
+
+        # プロビジョニングファイルをXcodeにインストール
+        mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
+        cp $HOME/.mobileprovision.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/
+
+        # ビルド
+        xcodebuild -project youkoso.xcodeproj -scheme YourScheme -destination "generic/platform=iOS" build
+
+    - name: Archive
+      run: xcodebuild -project youkoso.xcodeproj -scheme YourScheme -destination "generic/platform=iOS" archive -archivePath YourApp.xcarchive
+
+    - name: Export IPA
+      run: xcodebuild -archivePath youkoso.xcarchive -exportOptionsPlist exportOptions.plist -exportPath . -allowProvisioningUpdates
+
+    - name: Upload IPA
+      uses: actions/upload-artifact@v2
+      with:
+        name: youkoso
+        path: ./youkoso.ipa
