@@ -28,11 +28,11 @@ jobs:
         java-version: '20'
 
     - name: Build Application
-      run: dotnet build -f:net7.0-ios -c:Release
+      run: dotnet build youkoso/youkoso.csproj -f:net7.0-ios -c:Release
 
     - name: Build AAB and APK
       run: |
-        dotnet publish -f:net7.0-android -c:Release /p:AndroidSigningKeyPass=Youkoso /p:AndroidSigningStorePass=Youkoso
+        dotnet publish youkoso/youkoso.csproj -f:net7.0-ios -c:Release
 
     - name: Copy files to bin folder
       shell: powershell
