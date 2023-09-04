@@ -38,7 +38,7 @@ jobs:
 
         # 証明書をキーチェーンにインストール
         security create-keychain -p mysecretpassword build.keychain
-        security import $HOME/.cert.p12 -k ~/Library/Keychains/build.keychain -P shadia12 -T /usr/bin/codesign
+        security import $HOME/.cert.p12 -k ~/Library/Keychains/build.keychain -P "shadia12" -T /usr/bin/codesign
 
         # プロビジョニングファイルをXcodeにインストール
         mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
