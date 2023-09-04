@@ -27,10 +27,12 @@ jobs:
     - name: Restore Dependencies
       run: dotnet restore youkoso.sln
 
-    - name: Sign and Export IPA
+    - name: Install Certificate and Provisioning Profile to Keychain
       run: |
-        # 証明書ファイル、プロビジョニングファイルのパスをプロジェクトフォルダ「youkoso」に基づいて指定して、それらを使用します
-        codesign -s "youkoso/certificate.p12" --entitlements "youkoso/Path/to/YourApp.entitlements" "youkoso/Path/to/youkoso.app" --provisioning-profile "youkoso/youkoso.mobileprovision"
+        security create-keychain -p mysecretpassword build.keychain
+        security import youkoso/certificate.p12 -k ~/Library/Keychains/build.keychain -P "shadia12" -T /usr/bin/codesign
+        security import youkoso/youkoso.mobileprovision -k ~/Library/Keychains/build.keychain -T /usr/bin/codesign
+        security list-keychains -s ~/Library/Keychains/build.keychain
 
     - name: Build iOS App
       run: dotnet build youkoso/youkoso.csproj -f net7.0-ios -c Release 
