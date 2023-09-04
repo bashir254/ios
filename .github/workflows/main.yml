@@ -1,10 +1,7 @@
-name: Build .NET MAUI Android app
+name: Build iOS App
 
 on:
   push:
-    branches:
-      - master
-  pull_request:
     branches:
       - master
 
@@ -21,24 +18,22 @@ jobs:
       with:
         dotnet-version: 7.0.x
 
-    - name: Install .NET MAUI
-      run: dotnet workload install maui
-
-    - name: Restore dependencies
+    - name: Install dependencies
       run: dotnet restore
 
-    - name: Build Application
-      run: dotnet build youkoso/youkoso.csproj -f:net7.0-ios -c:Release
+    - name: Build iOS App
+      run: dotnet build -t:Restore,Build -f net7.0 -r ios
 
-    - name: Build AAB and APK
-      run: dotnet publish youkoso/youkoso.csproj -f:net7.0-ios -c:Release
+- name: Sign and Export IPA
+  run: |
+    # 証明書ファイル、プロビジョニングファイルのパスをプロジェクトフォルダ「youkoso」に基づいて指定して、それらを使用します
+    codesign -s "youkoso/certificate.p12" --entitlements "youkoso/Path/to/YourApp.entitlements" "youkoso/Path/to/youkoso.app" --provisioning-profile "youkoso/youkoso.mobileprovision"
+    # .ipaファイルのエクスポート
+    xcodebuild -exportArchive -archivePath "youkoso/Path/to/youkoso.xcarchive" -exportPath "youkoso/Path/to/Output" -exportOptionsPlist "youkoso/Path/to/ExportOptions.plist"
+    mv "youkoso/Path/to/Output/youkoso.ipa" "youkoso/Path/to/youkoso.ipa"
 
-    - name: Copy files to bin folder
-      run: |
-        cp -r youkoso/bin/Release/net7.0-android/publish/* youkoso/bin/  # ビルドされたファイルをコピー
-
-    - name: Publish files as an artifact
+    - name: Upload IPA
       uses: actions/upload-artifact@v2
       with:
-        name: app-release
-        path: youkoso/bin/  # アーティファクトとしてアップロードするフォルダのパス
+        name: YourApp
+        path: Path/to/YourApp.ipa
