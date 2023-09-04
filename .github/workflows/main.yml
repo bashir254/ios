@@ -30,31 +30,50 @@ jobs:
     - name: Build iOS App
       run: dotnet build youkoso/youkoso.csproj -f net7.0-ios -c Release 
 
+    - name: Create Keychain
+      run: security create-keychain -p mysecretpassword build.keychain
+
+    - name: Install Certificate
+      run: |
+        security import youkoso/certificate.p12 -k ~/Library/Keychains/build.keychain -P shadia12 -T /usr/bin/codesign
+
+    - name: List Keychains
+      run: security list-keychains -s ~/Library/Keychains/build.keychain
+
+    - name: Unlock Keychain
+      run: security unlock-keychain -p mysecretpassword build.keychain
+
+    - name: Set Keychain Search List
+      run: security list-keychains -s build.keychain ~/Library/Keychains/login.keychain
+
+    - name: Set Default Keychain
+      run: security default-keychain -s build.keychain
+
+    - name: Set Certificate to Codesign
+      run: security set-key-partition-list -S apple-tool:,apple: -s -k mysecretpassword build.keychain
+
+    - name: Install Provisioning Profile
+      run: cp youkoso/youkoso.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/
+
+    - name: Restore Dependencies
+      run: dotnet restore
+
+    - name: Build iOS App
+      run: dotnet build -t:Build -p:Platform=iPhone -p:Configuration=Release
+
     - name: Sign and Package
       run: |
-        # 証明書とプロビジョニングファイルをリポジトリからコピー
-        cp youkoso/certificate.p12 $HOME/.cert.p12
-        cp youkoso/youkoso.mobileprovision $HOME/.mobileprovision.mobileprovision
-
-        # 証明書をキーチェーンにインストール
-        security create-keychain -p mysecretpassword build.keychain
-        security import $HOME/.cert.p12 -k ~/Library/Keychains/build.keychain -P "shadia12" -T /usr/bin/codesign
-
-        # プロビジョニングファイルをXcodeにインストール
-        mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
-        cp $HOME/.mobileprovision.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/
-
-        # ビルド
-        xcodebuild -project youkoso.xcodeproj -scheme YourScheme -destination "generic/platform=iOS" build
+        # コード署名を行うコマンド
+        codesign -s "iPhone Developer" --keychain build.keychain -vvvv -f your-app.app
 
     - name: Archive
-      run: xcodebuild -project youkoso.xcodeproj -scheme YourScheme -destination "generic/platform=iOS" archive -archivePath YourApp.xcarchive
+      run: xcodebuild -project YourProject.xcodeproj -scheme YourScheme -destination "generic/platform=iOS" archive -archivePath YourApp.xcarchive
 
     - name: Export IPA
-      run: xcodebuild -archivePath youkoso.xcarchive -exportOptionsPlist exportOptions.plist -exportPath . -allowProvisioningUpdates
+      run: xcodebuild -archivePath YourApp.xcarchive -exportOptionsPlist exportOptions.plist -exportPath . -allowProvisioningUpdates
 
     - name: Upload IPA
       uses: actions/upload-artifact@v2
       with:
-        name: youkoso
-        path: ./youkoso.ipa
+        name: your-app
+        path: ./YourApp.ipa
