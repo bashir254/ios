@@ -22,10 +22,10 @@ jobs:
       run: dotnet workload install maui
 
     - name: Install dependencies
-      run: dotnet restore
+      run: dotnet restore youkoso.sln
 
     - name: Build iOS App
-      run: dotnet build -t:Restore,Build -f net7.0 -r ios
+      run: dotnet build youkoso/youkoso.csproj -t:Restore,Build -f net7.0 -r ios
 
     - name: Sign and Export IPA
       run: |
