@@ -46,8 +46,8 @@ jobs:
     - name: Set Default Keychain
       run: security default-keychain -s build.keychain
 
-    - name: Set Certificate to Codesign
-      run: security set-key-partition-list -S apple-tool:,apple: -s -k mysecretpassword build.keychain
+    #- name: Set Certificate to Codesign
+      #run: security set-key-partition-list -S apple-tool:,apple: -s -k mysecretpassword build.keychain
 
     - name: Install Provisioning Profile
       run: cp youkoso/youkoso.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/
