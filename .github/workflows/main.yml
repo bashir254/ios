@@ -27,13 +27,14 @@ jobs:
     - name: Restore Dependencies
       run: dotnet restore youkoso.sln
 
-    - name: Build iOS App
-      run: dotnet build youkoso/youkoso.csproj -f net7.0-ios -c Release 
-
     - name: Sign and Export IPA
       run: |
         # 証明書ファイル、プロビジョニングファイルのパスをプロジェクトフォルダ「youkoso」に基づいて指定して、それらを使用します
         codesign -s "youkoso/certificate.p12" --entitlements "youkoso/Path/to/YourApp.entitlements" "youkoso/Path/to/youkoso.app" --provisioning-profile "youkoso/youkoso.mobileprovision"
+
+    - name: Build iOS App
+      run: dotnet build youkoso/youkoso.csproj -f net7.0-ios -c Release 
+
         # .ipaファイルのエクスポート
         xcodebuild -exportArchive -archivePath "youkoso/Path/to/youkoso.xcarchive" -exportPath "youkoso/Path/to/Output" -exportOptionsPlist "youkoso/Path/to/ExportOptions.plist"
         mv "youkoso/Path/to/Output/youkoso.ipa" "youkoso/Path/to/youkoso.ipa"
