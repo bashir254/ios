@@ -28,7 +28,7 @@
 	</PropertyGroup>
 
 <PropertyGroup>
-  <RuntimeIdentifier>arm64</RuntimeIdentifier>
+  <RuntimeIdentifier>ios-arm64</RuntimeIdentifier>
 </PropertyGroup>
 
 	<ItemGroup>
