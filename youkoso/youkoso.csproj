@@ -27,10 +27,6 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
 	</PropertyGroup>
 
-	<PropertyGroup>
-	  <TargetFrameworks>;net7.0-ios15.2</TargetFrameworks>
-	</PropertyGroup>
-
 <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|iPhoneSimulator'">
   <Optimize>False</Optimize>
   <OutputPath>bin\iPhoneSimulator\Release</OutputPath>
