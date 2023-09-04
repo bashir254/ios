@@ -35,12 +35,3 @@ jobs:
     - name: Build iOS App
       run: dotnet build youkoso/youkoso.csproj -f net7.0-ios -c Release 
 
-        # .ipaファイルのエクスポート
-        xcodebuild -exportArchive -archivePath "youkoso/Path/to/youkoso.xcarchive" -exportPath "youkoso/Path/to/Output" -exportOptionsPlist "youkoso/Path/to/ExportOptions.plist"
-        mv "youkoso/Path/to/Output/youkoso.ipa" "youkoso/Path/to/youkoso.ipa"
-
-    - name: Upload IPA
-      uses: actions/upload-artifact@v2
-      with:
-        name: YourApp
-        path: Path/to/YourApp.ipa
