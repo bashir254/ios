@@ -30,7 +30,7 @@
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(TargetFramework)'=='net7.0-ios'">
-		<PublishTrimmed>false</PublishTrimmed>
+		<PublishTrimmed>true</PublishTrimmed>
 	  <CodesignKey>Apple Development: Created via API (M6XQ2Z2NSJ)</CodesignKey>
 	  <CodesignProvision>VS: com.companyname.youkoso Development</CodesignProvision>
 	</PropertyGroup>
@@ -76,15 +76,6 @@
 	  <PackageReference Include="CommunityToolkit.Maui.MediaElement" Version="2.0.0" />
 	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
 	  <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <PackageReference Include="CommunityToolkit.Maui" Version="3.0.0" />
-	  <PackageReference Include="CommunityToolkit.Maui.MediaElement" Version="1.0.0-build-667.82300" />
-	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.1.0-preview3" />
-	  <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
-	  <PackageReference Include="Plugin.MauiMTAdmob" Version="1.0.2" />
-		<PackageReference Include="Xamarin.Build.Download" Version="0.11.2" />
 	</ItemGroup>
 
 	<ItemGroup>
