@@ -17,6 +17,7 @@ jobs:
       uses: actions/setup-xcode@v2
       with:
         xcode-version: 14.3
+        repository: https://github.com/actions/setup-xcode
 
     - name: Checkout code
       uses: actions/checkout@v3
