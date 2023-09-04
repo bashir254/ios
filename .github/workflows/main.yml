@@ -27,9 +27,6 @@ jobs:
     - name: Restore Dependencies
       run: dotnet restore youkoso.sln
 
-    - name: Build iOS App
-      run: dotnet build youkoso/youkoso.csproj -f net7.0-ios -c Release 
-
     - name: Create Keychain
       run: security create-keychain -p mysecretpassword build.keychain
 
@@ -55,11 +52,8 @@ jobs:
     - name: Install Provisioning Profile
       run: cp youkoso/youkoso.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/
 
-    - name: Restore Dependencies
-      run: dotnet restore
-
-    - name: Build iOS App
-      run: dotnet build -t:Build -p:Platform=iPhone -p:Configuration=Release
+    - name: Restore Dependencies (iOS)
+      run: dotnet restore -t:Build -p:Platform=iPhone -p:Configuration=Release
 
     - name: Sign and Package
       run: |
