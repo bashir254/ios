@@ -31,8 +31,6 @@
 
 	<PropertyGroup Condition="'$(TargetFramework)'=='net7.0-ios'">
 		<PublishTrimmed>true</PublishTrimmed>
-	  <CodesignKey>Apple Development: Created via API (M6XQ2Z2NSJ)</CodesignKey>
-	  <CodesignProvision>VS: com.companyname.youkoso Development</CodesignProvision>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-ios|AnyCPU'">
