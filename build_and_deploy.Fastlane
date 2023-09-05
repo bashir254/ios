@@ -13,6 +13,9 @@ platform :ios do
       lock_when_sleeps: false
     )
 
+# Enable interactive mode
+opt_out_usage
+
     # ビルド
     gym(
       scheme: "com.companyname.youkoso",
