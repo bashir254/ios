@@ -7,34 +7,22 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
-      - name: Install and run xcodegen
-        run: |
-          brew install xcodegen
-          xcodegen generate
+    - name: Setup Ruby
+      uses: actions/setup-ruby@v1
+      with:
+        ruby-version: 2.7
 
-      - name: Run fastlane setup
-        env:
-          APPLE_ACCOUNT: ${{ secrets.APPLE_ACCOUNT }}
-          TEAM_ID: ${{ secrets.TEAM_ID }}
-        run: |
-          fastlane setup --verbose
+    - name: Install Fastlane
+      run: gem install fastlane
 
-      - name: Run fastlane build
-        env:
-          MATCH_REPO: ${{ secrets.MATCH_REPO }}
-          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
-          SIGNING_ID: ${{ secrets.SIGNING_ID }}
-          APPLE_ACCOUNT: ${{ secrets.APPLE_ACCOUNT }}
-          TEAM_ID: ${{ secrets.TEAM_ID }}
-        run: |
-          fastlane compile --verbose
-
-      - name: Run fastlane deploy
-        env:
-          HOCKEY_TOKEN: ${{ secrets.HOCKEY_TOKEN }}
-          APPLE_ACCOUNT: ${{ secrets.APPLE_ACCOUNT }}
-          TEAM_ID: ${{ secrets.TEAM_ID }}
-        run: |
-          fastlane deploy --verbose
+    - name: Build and Deploy
+      env:
+        MATCH_REPO: ${{ secrets.MATCH_REPO }}
+        MATCH_PASSWORD: ${{ secrets.MATCH_PASS }}
+        SIGNING_ID: ${{ secrets.SIGNING_ID }}
+        APPLE_ACCOUNT: ${{ secrets.APPLE_ACCOUNT }}
+        TEAM_ID: ${{ secrets.TEAM_ID }}
+        HOCKEY_TOKEN: ${{ secrets.HOCKEY_TOKEN }}
+      run: fastlane build_and_deploy
