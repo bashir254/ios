@@ -9,20 +9,20 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-    - name: Setup Ruby
-      uses: actions/setup-ruby@v1
-      with:
-        ruby-version: 2.7
+      - name: Setup Ruby
+        uses: actions/setup-ruby@v1
+        with:
+          ruby-version: 2.7
 
-    - name: Install Fastlane
-      run: gem install fastlane
+      - name: Install Fastlane
+        run: gem install fastlane
 
-    - name: Build and Deploy
-      env:
-        MATCH_REPO: ${{ secrets.MATCH_REPO }}
-        MATCH_PASSWORD: ${{ secrets.MATCH_PASS }}
-        SIGNING_ID: ${{ secrets.SIGNING_ID }}
-        APPLE_ACCOUNT: ${{ secrets.APPLE_ACCOUNT }}
-        TEAM_ID: ${{ secrets.TEAM_ID }}
-        HOCKEY_TOKEN: ${{ secrets.HOCKEY_TOKEN }}
-      run: fastlane build_and_deploy
+      - name: Build and Deploy
+        env:
+          MATCH_REPO: ${{ secrets.MATCH_REPO }}
+          MATCH_PASSWORD: ${{ secrets.MATCH_PASS }}
+          SIGNING_ID: ${{ secrets.SIGNING_ID }}
+          APPLE_ACCOUNT: ${{ secrets.APPLE_ACCOUNT }}
+          TEAM_ID: ${{ secrets.TEAM_ID }}
+          HOCKEY_TOKEN: ${{ secrets.HOCKEY_TOKEN }}
+        run: fastlane build_and_deploy
