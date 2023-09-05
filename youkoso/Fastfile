@@ -4,6 +4,9 @@ default_platform :ios
 
 platform :ios do
   lane :build_and_deploy do
+    # Enable interactive mode
+    opt_out_usage
+
     create_keychain(
       name: "actiontest_keychain",
       password: "meow",
