@@ -11,10 +11,9 @@ platform :ios do
       unlock: true,
       timeout: 3600,
       lock_when_sleeps: false
+  # 非インタラクティブモードを無効にする
+  disable_interaction
     )
-
-# Enable interactive mode
-opt_out_usage
 
     # ビルド
     gym(
