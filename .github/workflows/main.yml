@@ -9,16 +9,16 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v2
-      with:
-        dotnet-version: 7.0.x
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: 7.0.x
 
       - name: Install .NET MAUI Dependencies
         run: dotnet workload install maui-ios maccatalyst
 
-    - name: Install dependencies
-      run: dotnet restore youkoso.sln
+      - name: Install dependencies
+        run: dotnet restore youkoso.sln
 
       - name: Clean Project
         run: dotnet clean youkoso/youkoso.csproj
