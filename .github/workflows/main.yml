@@ -17,6 +17,9 @@ jobs:
       - name: Install Fastlane
         run: gem install fastlane
 
+      - name: Set Fastlane to interactive mode
+        run: export FASTLANE_OPT_OUT_USAGE=false
+
       - name: Build and Deploy
         env:
           MATCH_REPO: ${{ secrets.MATCH_REPO }}
