@@ -13,9 +13,6 @@ platform :ios do
       lock_when_sleeps: false
     )
 
-    # 非インタラクティブモードを無効にする
-    disable_interaction
-
     # ビルド
     gym(
       scheme: "com.companyname.youkoso",
