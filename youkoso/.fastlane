@@ -13,8 +13,8 @@ platform :ios do
       lock_when_sleeps: false
     )
 
-# Enable interactive mode
-opt_out_usage
+    # 非インタラクティブモードを無効にする
+    disable_interaction
 
     # ビルド
     gym(
@@ -35,7 +35,7 @@ opt_out_usage
     hockey(
       api_token: ENV["HOCKEY_TOKEN"],  # HockeyAppのAPIトークン
       create_status: "2",             # HockeyAppで使用するステータスを指定
-      ipa: "youkoso.ipa",
+      ipa: "./path/to/youkoso.ipa",   # IPAファイルのパスを指定
       notes: ENV["RELEASENOTES"]       # リリースノート
     )
   end
