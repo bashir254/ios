@@ -1,73 +1,40 @@
-name: Build iOS App
-
-on:
-  push:
-    branches:
-      - master
+name: CI
+on: [push]
 
 jobs:
   build:
-    runs-on: macos-latest
+    runs-on: macOS-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v2
-      with:
-        dotnet-version: '7.0.x'
+      - name: Install and run xcodegen
+        run: |
+          brew install xcodegen
+          xcodegen generate
 
-    - name: Install Maui iOS
-      run: dotnet workload install maui-ios
+      - name: Run fastlane setup
+        env:
+          APPLE_ACCOUNT: ${{ secrets.APPLE_ACCOUNT }}
+          TEAM_ID: ${{ secrets.TEAM_ID }}
+        run: |
+          fastlane setup --verbose
 
-    - name: Install maccatalyst
-      run: dotnet workload install maccatalyst
+      - name: Run fastlane build
+        env:
+          MATCH_REPO: ${{ secrets.MATCH_REPO }}
+          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+          SIGNING_ID: ${{ secrets.SIGNING_ID }}
+          APPLE_ACCOUNT: ${{ secrets.APPLE_ACCOUNT }}
+          TEAM_ID: ${{ secrets.TEAM_ID }}
+        run: |
+          fastlane compile --verbose
 
-    - name: Restore Dependencies
-      run: dotnet restore youkoso.sln
-
-    - name: Create Keychain
-      run: security create-keychain -p mysecretpassword build.keychain
-
-    - name: Install Certificate
-      run: |
-        security import youkoso/certificate.p12 -k ~/Library/Keychains/build.keychain -P shadia12 -T /usr/bin/codesign
-
-    - name: List Keychains
-      run: security list-keychains -s ~/Library/Keychains/build.keychain
-
-    - name: Unlock Keychain
-      run: security unlock-keychain -p mysecretpassword build.keychain
-
-    - name: Set Keychain Search List
-      run: security list-keychains -s build.keychain ~/Library/Keychains/login.keychain
-
-    - name: Set Default Keychain
-      run: security default-keychain -s build.keychain
-
-    #- name: Set Certificate to Codesign
-      #run: security set-key-partition-list -S apple-tool:,apple: -s -k mysecretpassword build.keychain
-
-    - name: Install Provisioning Profile
-      run: cp youkoso/youkoso.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/
-
-    - name: Restore Dependencies (iOS)
-      run: dotnet restore -t:Build -p:Platform=iPhone -p:Configuration=Release
-
-    - name: Sign and Package
-      run: |
-        # コード署名を行うコマンド
-        codesign -s "iPhone Developer" --keychain build.keychain -vvvv -f your-app.app
-
-    - name: Archive
-      run: xcodebuild -project YourProject.xcodeproj -scheme YourScheme -destination "generic/platform=iOS" archive -archivePath YourApp.xcarchive
-
-    - name: Export IPA
-      run: xcodebuild -archivePath YourApp.xcarchive -exportOptionsPlist exportOptions.plist -exportPath . -allowProvisioningUpdates
-
-    - name: Upload IPA
-      uses: actions/upload-artifact@v2
-      with:
-        name: your-app
-        path: ./YourApp.ipa
+      - name: Run fastlane deploy
+        env:
+          HOCKEY_TOKEN: ${{ secrets.HOCKEY_TOKEN }}
+          APPLE_ACCOUNT: ${{ secrets.APPLE_ACCOUNT }}
+          TEAM_ID: ${{ secrets.TEAM_ID }}
+        run: |
+          fastlane deploy --verbose
