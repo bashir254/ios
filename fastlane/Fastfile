@@ -26,7 +26,7 @@ platform :ios do
     # 証明書の取得
     match(
       type: "appstore",            # 使用する証明書のタイプを指定
-      readonly: is_ci,
+      readonly: false,
       keychain_name: "actiontest_keychain",
       keychain_password: "meow"
     )

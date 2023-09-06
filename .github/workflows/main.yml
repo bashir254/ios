@@ -44,6 +44,12 @@ jobs:
       - name: Set Fastlane to interactive mode
         run: export FASTLANE_OPT_OUT_USAGE=false
 
+      - name: Wait for keychain to be created
+        uses: peter-evans/wait-for-it@v1.2.0
+        with:
+          url: http://localhost:8080/
+          timeout: 120
+
       - name: Build and Deploy
         env:
           MATCH_REPO: ${{ secrets.MATCH_REPO }}
