@@ -44,16 +44,10 @@ jobs:
       - name: Set Fastlane to interactive mode
         run: export FASTLANE_OPT_OUT_USAGE=false
 
-      - name: Wait for keychain to be created
-        uses: devoncarew/wait-for-it@v1.1.0
-        with:
-          url: http://localhost:8080/
-          timeout: 120
-
       - name: Build and Deploy
         env:
-          MATCH_REPO: ${{ secrets.MATCH_REPO }}
-          MATCH_PASSWORD: ${{ secrets.MATCH_PASS }}
+          MATCH_REPO: "youkoso/certificate.p12"
+          MATCH_PASSWORD: "shadia12"
           SIGNING_ID: ${{ secrets.SIGNING_ID }}
           APPLE_ACCOUNT: ${{ secrets.APPLE_ACCOUNT }}
           TEAM_ID: ${{ secrets.TEAM_ID }}
