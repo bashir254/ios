@@ -45,7 +45,7 @@ jobs:
         run: export FASTLANE_OPT_OUT_USAGE=false
 
       - name: Wait for keychain to be created
-        uses: peter-evans/wait-for-it@v1.2.0
+        uses: devoncarew/wait-for-it@v1.1.0
         with:
           url: http://localhost:8080/
           timeout: 120
