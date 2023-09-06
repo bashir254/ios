@@ -1,50 +1,23 @@
-name: iOS Starter Workflow
+name: CI
 
 on:
   push:
-    branches:
-      - master
+    branches: [ "master" ]
   pull_request:
-    branches:
-      - master
+    branches: [ "master" ]
 
 jobs:
   build-and-test:
-    name: Build and Test Default Scheme on iPhone Simulator
+    
     runs-on: macos-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: '7.0.x'
-
-      - name: Install .NET MAUI Dependencies
-        run: dotnet workload install maui-ios maccatalyst
-
-      - name: Restore Dependencies
-        run: dotnet restore youkoso.sln
-
-      - name: Build Project
-        run: dotnet build youkoso/youkoso.csproj --configuration Release --output ./bin
-
-      - name: Publish iOS App
-        run: dotnet publish youkoso/youkoso.csproj --configuration Release --framework net7.0-ios --runtime ios-arm64 --self-contained --output ./bin/publish
-
-      - name: Create .ipa File
-        run: xcodebuild -exportArchive -archivePath ./bin/youkoso.xcarchive -exportOptionsPlist ExportOptions.plist -exportPath ./bin/ipa
-
-      - name: Archive Artifacts
-        uses: actions/upload-artifact@v2
-        with:
-          name: youkoso-ipa
-          path: ./bin/ipa
-
-      - name: Archive Xcode Build
-        uses: actions/upload-artifact@v2
-        with:
-          name: youkoso-xcarchive
-          path: ./bin/youkoso.xcarchive
+    - name: Checkout repository
+      uses: actions/checkout@v3
+        
+    - uses: maxim-lobanov/setup-xcode@v1
+      with:
+        xcode-version: latest-stable
+        
+    - name: Build and test
+      run: xcodebuild clean build test -project youkoso/youkoso.csproj -scheme "com.companyname.youkoso" CODE_SIGN_IDENTITY="M6XQ2Z2NSJ" CODE_SIGNING_REQUIRED=NO
