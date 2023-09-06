@@ -34,39 +34,17 @@ jobs:
       - name: Publish iOS App
         run: dotnet publish youkoso/youkoso.csproj --configuration Release --framework net7.0-ios --runtime ios-arm64 --self-contained --output ./bin/publish
 
-      - name: Install Fastlane
-        run: sudo gem install fastlane -NV
+      - name: Create .ipa File
+        run: xcodebuild -exportArchive -archivePath ./bin/youkoso.xcarchive -exportOptionsPlist ExportOptions.plist -exportPath ./bin/ipa
 
-      - name: Set up Fastlane
-        run: |
-          bundle install
-          fastlane init # Fastfileを生成するコマンド
-        working-directory: youkoso
+      - name: Archive Artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: youkoso-ipa
+          path: ./bin/ipa
 
-      - name: Install the Apple certificate and provisioning profile
-        run: |
-          # 証明書とプロビジョニングファイルのパス
-          CERTIFICATE_PATH=youkoso/certificate.p12
-          PP_PATH=youkoso/youkoso.mobileprovision
-          KEYCHAIN_PATH=$HOME/Library/Keychains/app-signing.keychain-db
-
-          # キーチェーンを作成
-          security create-keychain -p "altikena1234" $KEYCHAIN_PATH
-          security set-keychain-settings -lut 21600 $KEYCHAIN_PATH
-          security unlock-keychain -p "altikena1234" $KEYCHAIN_PATH
-
-          # 証明書をキーチェーンにインポート
-          security import $CERTIFICATE_PATH -P "shadia12" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
-
-          # プロビジョニングプロファイルを適用
-          mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
-          cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
-
-      - name: Run Fastlane
-        run: bundle exec fastlane upload_to_app_store
-        env:
-          FASTLANE_USERNAME: "mham@codeuniverse.net"
-          FASTLANE_PASSWORD: "Sudan2020"
-
-      - name: Upload to App Store Connect
-        run: fastlane deliver --ipa "./bin/publish/youkoso.dll" --username ${{ secrets.APPLE_ID }} --verbose
+      - name: Archive Xcode Build
+        uses: actions/upload-artifact@v2
+        with:
+          name: youkoso-xcarchive
+          path: ./bin/youkoso.xcarchive
