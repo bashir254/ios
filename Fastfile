@@ -1,12 +1,10 @@
-fastlane_version "2.195.0"
-
-default_platform :ios
-
 platform :ios do
-  lane :build_and_deploy do
-    # Enable interactive mode
-    opt_out_usage
 
+  lane :setup do
+    setup_project
+  end
+
+  private_lane :setup_project do
     create_keychain(
       name: "actiontest_keychain",
       password: "meow",
@@ -15,28 +13,47 @@ platform :ios do
       timeout: 3600,
       lock_when_sleeps: false
     )
+  end
 
-    # ビルド
-    gym(
-      scheme: "com.companyname.youkoso",
-      configuration: "Release",
-      export_method: "app-store"   # エクスポート方法を指定
+  lane :build do
+    cert(
+      development: "iPhone Developer: mohamed bashir (M6XQ2Z2NSJ)", # 開発用証明書名を指定
+      production: "iPhone Distribution: Your Company (2DF4733AY8)" # プロダクション用証明書名を指定
     )
 
-    # 証明書の取得
+    sigh(
+      adhoc: true, # もしくは:adhoc
+      app_identifier: "com.companyname.youkoso",
+      username: "mham@codeuniverse.net" # Apple Developerアカウントのユーザー名を指定
+    )
+
     match(
-      type: "appstore",            # 使用する証明書のタイプを指定
-      readonly: false,
+      type: "appstore",
+      readonly: is_ci,
       keychain_name: "actiontest_keychain",
       keychain_password: "meow"
     )
 
-    # デプロイ
+    update_project_provisioning(
+      xcodeproj: ENV["XCODE_PROJ"],
+      profile: ENV["sigh_com.redspace.actionstest_appstore_profile-path"],
+      target_filter: "actionstest",
+      build_configuration: "Release",
+      code_signing_identity: "iPhone Distribution: REDspace Inc."
+    )
+
+    build_app(
+      scheme: "actionstest",
+      project: ENV["XCODE_PROJ"]
+    )
+  end
+
+  lane :hockey_upload do
     hockey(
-      api_token: ENV["HOCKEY_TOKEN"],  # HockeyAppのAPIトークン
-      create_status: "2",             # HockeyAppで使用するステータスを指定
-      ipa: "./path/to/youkoso.ipa",   # IPAファイルのパスを指定
-      notes: ENV["RELEASENOTES"]       # リリースノート
+      api_token: ENV["HOCKEY_TOKEN"],
+      create_status: "2",
+      ipa: "actionstest.ipa",
+      notes: ENV["RELEASENOTES"]
     )
   end
 end

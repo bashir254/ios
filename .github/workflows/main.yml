@@ -1,55 +1,34 @@
 name: CI
+
 on: [push]
 
 jobs:
   build:
     runs-on: macOS-latest
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v2
-        with:
-          dotnet-version: 7.0.x
-
-      - name: Install .NET MAUI Dependencies
-        run: dotnet workload install maui-ios maccatalyst
-
-      - name: Install dependencies
-        run: dotnet restore youkoso.sln
-
-      - name: Clean Project
-        run: dotnet clean youkoso/youkoso.csproj
-
-      - name: Install .NET MAUI Dependencies and Publish iOS App
-        run: dotnet msbuild /t:Restore youkoso/youkoso.csproj
-
-      - name: Build Project
-        run: dotnet build youkoso/youkoso.csproj --configuration Release --output ./bin
-
-      - name: Publish iOS App
-        run: dotnet publish youkoso/youkoso.csproj --configuration Release --framework net7.0-ios --runtime ios-arm64 --self-contained --output ./bin/publish
-
-      - name: Setup Ruby
-        uses: actions/setup-ruby@v1
-        with:
-          ruby-version: 2.7
-
-      - name: Install Fastlane
-        run: gem install fastlane
-        working-directory: youkoso
-
-      - name: Set Fastlane to interactive mode
-        run: export FASTLANE_OPT_OUT_USAGE=false
-
-      - name: Build and Deploy
-        env:
-          MATCH_REPO: "youkoso/certificate.p12"
-          MATCH_PASSWORD: "shadia12"
-          SIGNING_ID: ${{ secrets.SIGNING_ID }}
-          APPLE_ACCOUNT: ${{ secrets.APPLE_ACCOUNT }}
-          TEAM_ID: ${{ secrets.TEAM_ID }}
-          HOCKEY_TOKEN: ${{ secrets.HOCKEY_TOKEN }}
-        run: fastlane build_and_deploy
+    - uses: actions/checkout@v2
+    - name: Install and run xcodegen
+      run: |
+        brew install xcodegen
+        xcodegen generate
+    - name: Run fastlane setup
+      env:
+        APPLE_ACCOUNT: ${{ secrets.APPLE_ACCOUNT }}
+        TEAM_ID: ${{ secrets.TEAM_ID }}
+      run: |
+        fastlane setup --verbose
+    - name: Run fastlane build
+      env:
+        MATCH_REPO: "certificate.p12"
+        MATCH_PASSWORD: "shadia12"
+        SIGNING_ID: ${{ secrets.SIGNING_ID }}
+        APPLE_ACCOUNT: ${{ secrets.APPLE_ACCOUNT }}
+        TEAM_ID: ${{ secrets.TEAM_ID }}
+      run: |
+        fastlane compile --verbose
+    - name: Run fastlane deploy
+      env:
+        HOCKEY_TOKEN: ${{ secrets.HOCKEY_TOKEN}}
+        APPLE_ACCOUNT: ${{ secrets.APPLE_ACCOUNT }}
+        TEAM_ID: ${{ secrets.TEAM_ID }}
+      run: fastlane deploy --verbose
