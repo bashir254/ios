@@ -26,6 +26,12 @@ jobs:
       - name: Install .NET MAUI Dependencies and Publish iOS App
         run: dotnet msbuild /t:Restore youkoso/youkoso.csproj
 
+      - name: Build Project
+        run: dotnet build youkoso/youkoso.csproj --configuration Release --output ./bin
+
+      - name: Publish iOS App
+        run: dotnet publish youkoso/youkoso.csproj --configuration Release --framework net7.0-ios --runtime ios-arm64 --self-contained --output ./bin/publish
+
       - name: Setup Ruby
         uses: actions/setup-ruby@v1
         with:
@@ -33,6 +39,7 @@ jobs:
 
       - name: Install Fastlane
         run: gem install fastlane
+        working-directory: youkoso
 
       - name: Set Fastlane to interactive mode
         run: export FASTLANE_OPT_OUT_USAGE=false

@@ -18,7 +18,6 @@ platform :ios do
 
     # ビルド
     gym(
-      workspace: "youkoso.sln",
       scheme: "com.companyname.youkoso",
       configuration: "Release",
       export_method: "app-store"   # エクスポート方法を指定
