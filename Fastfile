@@ -1,59 +1,37 @@
+# Fastlaneの基本設定
+default_platform(:ios)
+
+# ビルド設定
 platform :ios do
+  lane :build_and_upload do
+    # ここにビルド前の前処理を追加できます
 
-  lane :setup do
-    setup_project
-  end
+    # Xcodeプロジェクトのパス
+    project = "youkoso.xcodeproj"
 
-  private_lane :setup_project do
-    create_keychain(
-      name: "actiontest_keychain",
-      password: "meow",
-      default_keychain: true,
-      unlock: true,
-      timeout: 3600,
-      lock_when_sleeps: false
-    )
-  end
+    # ターゲット名とスキーマ名
+    target = "youkoso"
+    scheme = "youkoso"
 
-  lane :build do
-    cert(
-      development: "iPhone Developer: mohamed bashir (M6XQ2Z2NSJ)", # 開発用証明書名を指定
-      production: "iPhone Distribution: Your Company (2DF4733AY8)" # プロダクション用証明書名を指定
-    )
-
-    sigh(
-      adhoc: true, # もしくは:adhoc
-      app_identifier: "com.companyname.youkoso",
-      username: "mham@codeuniverse.net" # Apple Developerアカウントのユーザー名を指定
-    )
-
-    match(
-      type: "appstore",
-      readonly: is_ci,
-      keychain_name: "actiontest_keychain",
-      keychain_password: "meow"
-    )
-
-    update_project_provisioning(
-      xcodeproj: ENV["XCODE_PROJ"],
-      profile: ENV["sigh_com.redspace.actionstest_appstore_profile-path"],
-      target_filter: "actionstest",
-      build_configuration: "Release",
-      code_signing_identity: "iPhone Distribution: REDspace Inc."
-    )
-
+    # ビルド
     build_app(
-      scheme: "actionstest",
-      project: ENV["XCODE_PROJ"]
+      workspace: project,
+      scheme: scheme,
+      export_method: "app-store", # ディストリビューション方法を指定
+      export_options: { 
+        method: "app-store",
+        uploadBitcode: true,
+        uploadSymbols: true
+      }
     )
-  end
 
-  lane :hockey_upload do
-    hockey(
-      api_token: ENV["HOCKEY_TOKEN"],
-      create_status: "2",
-      ipa: "actionstest.ipa",
-      notes: ENV["RELEASENOTES"]
+    # App Store Connectにアップロード
+    upload_to_app_store(
+      skip_waiting_for_build_processing: true, # ビルド処理が完了するまで待たない
+      username: ENV["FASTLANE_USERNAME"],     # 環境変数からApple IDを取得
+      app_identifier: "com.example.youkoso",  # アプリのバンドルIDを指定
+      team_id: "YOUR_TEAM_ID",                # 開発チームのIDを指定
+      skip_binary_upload: true                # バイナリのアップロードをスキップ（ipaファイルは手動で用意する場合）
     )
   end
 end

@@ -1,35 +1,72 @@
-name: CI
+name: iOS Starter Workflow
 
-on: [push]
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
 
 jobs:
-  build:
-    runs-on: macOS-latest
+  build-and-test:
+    name: Build and Test Default Scheme on iPhone Simulator
+    runs-on: macos-latest
+
     steps:
-    - uses: actions/checkout@v2
-    - name: Install and run xcodegen
-      run: |
-        cd /youkoso/youkoso.csproj
-        brew install xcodegen
-        xcodegen generate
-    - name: Run fastlane setup
-      env:
-        APPLE_ACCOUNT: ${{ secrets.APPLE_ACCOUNT }}
-        TEAM_ID: ${{ secrets.TEAM_ID }}
-      run: |
-        fastlane setup --verbose
-    - name: Run fastlane build
-      env:
-        MATCH_REPO: "certificate.p12"
-        MATCH_PASSWORD: "shadia12"
-        SIGNING_ID: ${{ secrets.SIGNING_ID }}
-        APPLE_ACCOUNT: ${{ secrets.APPLE_ACCOUNT }}
-        TEAM_ID: ${{ secrets.TEAM_ID }}
-      run: |
-        fastlane compile --verbose
-    - name: Run fastlane deploy
-      env:
-        HOCKEY_TOKEN: ${{ secrets.HOCKEY_TOKEN}}
-        APPLE_ACCOUNT: ${{ secrets.APPLE_ACCOUNT }}
-        TEAM_ID: ${{ secrets.TEAM_ID }}
-      run: fastlane deploy --verbose
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '7.0.x'
+
+      - name: Install .NET MAUI Dependencies
+        run: dotnet workload install maui-ios maccatalyst
+
+      - name: Restore Dependencies
+        run: dotnet restore youkoso.sln
+
+      - name: Build Project
+        run: dotnet build youkoso/youkoso.csproj --configuration Release --output ./bin
+
+      - name: Publish iOS App
+        run: dotnet publish youkoso/youkoso.csproj --configuration Release --framework net7.0-ios --runtime ios-arm64 --self-contained --output ./bin/publish
+
+      - name: Install Fastlane
+        run: sudo gem install fastlane -NV
+
+      - name: Set up Fastlane
+        run: |
+          bundle install
+          fastlane init # Fastfileを生成するコマンド
+        working-directory: youkoso
+
+      - name: Install the Apple certificate and provisioning profile
+        run: |
+          # 証明書とプロビジョニングファイルのパス
+          CERTIFICATE_PATH=youkoso/certificate.p12
+          PP_PATH=youkoso/youkoso.mobileprovision
+          KEYCHAIN_PATH=$HOME/Library/Keychains/app-signing.keychain-db
+
+          # キーチェーンを作成
+          security create-keychain -p "altikena1234" $KEYCHAIN_PATH
+          security set-keychain-settings -lut 21600 $KEYCHAIN_PATH
+          security unlock-keychain -p "altikena1234" $KEYCHAIN_PATH
+
+          # 証明書をキーチェーンにインポート
+          security import $CERTIFICATE_PATH -P "shadia12" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
+
+          # プロビジョニングプロファイルを適用
+          mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
+          cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
+
+      - name: Run Fastlane
+        run: bundle exec fastlane upload_to_app_store
+        env:
+          FASTLANE_USERNAME: "mham@codeuniverse.net"
+          FASTLANE_PASSWORD: "Sudan2020"
+
+      - name: Upload to App Store Connect
+        run: fastlane deliver --ipa "./bin/publish/youkoso.dll" --username ${{ secrets.APPLE_ID }} --verbose
