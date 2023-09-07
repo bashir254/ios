@@ -5,7 +5,7 @@ platform :ios do
     create_keychain(
       name: "MyKeychain", # キーチェーンの名前を指定
       password: "MyPassword", # キーチェーンのパスワードを指定
-      default_keychain: true,
+      default_keychain: false,
       unlock: true,
       timeout: 3600,
       lock_when_sleeps: false
