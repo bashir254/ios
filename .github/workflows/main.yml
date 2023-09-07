@@ -27,8 +27,16 @@ jobs:
     - name: Build .NET MAUI iOS App
       run: dotnet build youkoso.sln --configuration Release --no-restore
 
+    - name: Setup Ruby
+      uses: actions/setup-ruby@v1
+      with:
+        ruby-version: 2.7
+
+    - name: Install Fastlane
+      run: gem install fastlane
+
     - name: Create Keychain and Unlock
-      run: fastlane create_keychain_ios --skip_confirmation true name:MyKeychain password:MyPassword
+      run: fastlane create_keychain_ios name:MyKeychain password:MyPassword
       env:
         MY_KEYCHAIN_PATH: $HOME/Library/Keychains/MyKeychain-db
         KEYCHAIN_PASSWORD: MyPassword # キーチェーンのパスワードを設定
