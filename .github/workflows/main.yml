@@ -1,23 +1,52 @@
-name: CI
+name: Build .NET MAUI iOS App
 
 on:
   push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
+    branches:
+      - master
 
 jobs:
-  build-and-test:
-    
+  build-and-publish-ios:
     runs-on: macos-latest
 
     steps:
-    - name: Checkout repository
+    - name: Checkout Repository
       uses: actions/checkout@v3
-        
-    - uses: maxim-lobanov/setup-xcode@v1
+
+    - name: Set up .NET SDK
+      uses: actions/setup-dotnet@v1
       with:
-        xcode-version: latest-stable
-        
-    - name: Build and test
-      run: xcodebuild clean build test -project youkoso/youkoso.csproj -scheme "com.companyname.youkoso" CODE_SIGN_IDENTITY="M6XQ2Z2NSJ" CODE_SIGNING_REQUIRED=NO
+        dotnet-version: '7.0.x'
+
+    - name: Restore NuGet Packages
+      run: dotnet restore youkoso.sln
+
+    - name: Build .NET MAUI iOS App
+      run: dotnet build youkoso.sln --configuration Release --no-restore
+
+    - name: Create Keychain and Unlock
+      run: fastlane create_keychain name:MyKeychain password:MyPassword
+
+    - name: Import Certificate and Provisioning Profile
+      run: |
+        # 証明書ファイルをキーチェーンにエクスポート
+        security import youkoso/certificate.p12 -k ~/Library/Keychains/MyKeychain-db -P shadia12 -T /usr/bin/codesign
+
+        # プロビジョニングファイルをキーチェーンにエクスポート
+        security import youkoso/youkoso.mobileprovision -k ~/Library/Keychains/MyKeychain-db -T /usr/bin/codesign
+
+    - name: Build iOS App
+      run: |
+        msbuild youkoso.sln /t:Clean,Build /p:Configuration=Release /p:Platform=iPhoneSimulator
+
+    - name: Archive iOS App
+      run: |
+        msbuild youkoso.sln /t:Archive /p:Configuration=Release /p:Platform=iPhone
+
+    - name: Publish iOS App to Artifactory
+      run: |
+        # ビルドされたiOSアプリをArtifactoryにアップロードするスクリプトを実行
+        # このスクリプトはArtifactoryのAPIを使用してアーティファクトをアップロードします
+
+    - name: Clean Up Keychain
+      run: fastlane delete_keychain name:MyKeychain

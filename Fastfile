@@ -1,13 +1,10 @@
+default_platform(:ios)
+
 platform :ios do
-
-  lane :setup do
-    setup_project
-  end
-
-  private_lane :setup_project do
+  lane :create_and_unlock_keychain do
     create_keychain(
-      name: "actiontest_keychain",
-      password: "sudan1234",
+      name: "MyKeychain", # キーチェーンの名前を指定
+      password: "MyPassword", # キーチェーンのパスワードを指定
       default_keychain: true,
       unlock: true,
       timeout: 3600,
