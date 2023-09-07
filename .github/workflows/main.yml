@@ -48,7 +48,7 @@ jobs:
     - name: Import Certificate and Provisioning Profile
       run: |
         # キーチェーンにアクセス
-        security unlock-keychain -p $KEYCHAIN_PASSWORD $MY_KEYCHAIN_PATH
+        # security unlock-keychain -p $KEYCHAIN_PASSWORD $MY_KEYCHAIN_PATH
 
         # 証明書ファイルをキーチェーンにエクスポート
         security import youkoso/certificate.p12 -k $MY_KEYCHAIN_PATH -P $KEYCHAIN_PASSWORD2 -T /usr/bin/codesign
