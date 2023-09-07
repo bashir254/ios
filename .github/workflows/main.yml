@@ -51,11 +51,10 @@ jobs:
         # security unlock-keychain -p $KEYCHAIN_PASSWORD $MY_KEYCHAIN_PATH
 
         # 証明書ファイルをキーチェーンにエクスポート
-        security import youkoso/certificate.p12 -P shadia12 -t cert -f pkcs12 -k $MY_KEYCHAIN_PATH
-        #security import youkoso/certificate.p12 -k $MY_KEYCHAIN_PATH -P $KEYCHAIN_PASSWORD2 -T /usr/bin/codesign
+        security import youkoso/certificate.p12 -k $MY_KEYCHAIN_PATH -P shadia12 -t cert -f pkcs12
 
         # プロビジョニングファイルをキーチェーンにエクスポート
-        security import youkoso/youkoso.mobileprovision -k $MY_KEYCHAIN_PATH -T cert
+        security import youkoso/youkoso.mobileprovision -k $MY_KEYCHAIN_PATH -t cert
 
         # 証明書のパスワードを指定
         security set-keychain-password -p $KEYCHAIN_PASSWORD $MY_KEYCHAIN_PATH
