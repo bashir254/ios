@@ -28,11 +28,14 @@ jobs:
       run: dotnet build youkoso.sln --configuration Release --no-restore
 
     - name: Create Keychain and Unlock
-      run: fastlane create_keychain name:MyKeychain password:MyPassword --interactive
+      run: fastlane create_keychain name:MyKeychain password:MyPassword
       env:
         MY_KEYCHAIN_PATH: $HOME/Library/Keychains/MyKeychain-db
         KEYCHAIN_PASSWORD: MyPassword # キーチェーンのパスワードを設定
         KEYCHAIN_PASSWORD2: "shadia12" # キーチェーンのパスワードを設定
+
+    - name: Set Fastlane to interactive mode
+      run: export FASTLANE_OPT_OUT_USAGE=false
 
     - name: Import Certificate and Provisioning Profile
       run: |
