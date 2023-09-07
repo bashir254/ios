@@ -29,14 +29,17 @@ jobs:
 
     - name: Create Keychain and Unlock
       run: fastlane create_keychain name:MyKeychain password:MyPassword
+      env:
+        MY_KEYCHAIN_PATH: $HOME/Library/Keychains/MyKeychain-db
+        KEYCHAIN_PASSWORD: MyPassword # キーチェーンのパスワードを設定
 
     - name: Import Certificate and Provisioning Profile
       run: |
         # 証明書ファイルをキーチェーンにエクスポート
-        security import youkoso/certificate.p12 -k ~/Library/Keychains/MyKeychain-db -P shadia12 -T /usr/bin/codesign
+        security import youkoso/certificate.p12 -k $MY_KEYCHAIN_PATH -P shadia12 -T /usr/bin/codesign
 
         # プロビジョニングファイルをキーチェーンにエクスポート
-        security import youkoso/youkoso.mobileprovision -k ~/Library/Keychains/MyKeychain-db -T /usr/bin/codesign
+        security import youkoso/youkoso.mobileprovision -k $MY_KEYCHAIN_PATH -T /usr/bin/codesign
 
     - name: Build iOS App
       run: |
