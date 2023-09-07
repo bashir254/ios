@@ -32,14 +32,18 @@ jobs:
       env:
         MY_KEYCHAIN_PATH: $HOME/Library/Keychains/MyKeychain-db
         KEYCHAIN_PASSWORD: MyPassword # キーチェーンのパスワードを設定
+        KEYCHAIN_PASSWORD2: "shadia12" # キーチェーンのパスワードを設定
 
     - name: Import Certificate and Provisioning Profile
       run: |
         # 証明書ファイルをキーチェーンにエクスポート
-        security import youkoso/certificate.p12 -k $MY_KEYCHAIN_PATH -P shadia12 -T /usr/bin/codesign
+        security import youkoso/certificate.p12 -k $MY_KEYCHAIN_PATH -P $KEYCHAIN_PASSWORD2 -T /usr/bin/codesign
 
         # プロビジョニングファイルをキーチェーンにエクスポート
         security import youkoso/youkoso.mobileprovision -k $MY_KEYCHAIN_PATH -T /usr/bin/codesign
+
+        # 証明書のパスワードを指定
+        security set-keychain-password -p $KEYCHAIN_PASSWORD $MY_KEYCHAIN_PATH
 
     - name: Build iOS App
       run: |
