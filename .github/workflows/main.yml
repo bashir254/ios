@@ -18,8 +18,8 @@ jobs:
       with:
         dotnet-version: '7.0.x'
 
-      - name: Install .NET MAUI Dependencies
-        run: dotnet workload install maui-ios maccatalyst
+    - name: Install .NET MAUI Dependencies
+      run: dotnet workload install maui-ios maccatalyst
 
     - name: Restore NuGet Packages
       run: dotnet restore youkoso.sln
