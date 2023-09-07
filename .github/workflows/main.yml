@@ -38,7 +38,7 @@ jobs:
     - name: Create Keychain and Unlock
       run: fastlane create_keychain_ios name:MyKeychain password:MyPassword
       env:
-        MY_KEYCHAIN_PATH: $HOME/Library/Keychains/MyKeychain-db
+        MY_KEYCHAIN_PATH: $RUNNER_TEMP/app-signing.keychain-db
         KEYCHAIN_PASSWORD: MyPassword # キーチェーンのパスワードを設定
         KEYCHAIN_PASSWORD2: "shadia12" # キーチェーンのパスワードを設定
 
@@ -51,10 +51,11 @@ jobs:
         # security unlock-keychain -p $KEYCHAIN_PASSWORD $MY_KEYCHAIN_PATH
 
         # 証明書ファイルをキーチェーンにエクスポート
-        security import youkoso/certificate.p12 -k $MY_KEYCHAIN_PATH -P $KEYCHAIN_PASSWORD2 -T /usr/bin/codesign
+        security import youkoso/certificate.p12 -P shadia12 -A -t cert -f pkcs12 -k $MY_KEYCHAIN_PATH
+        #security import youkoso/certificate.p12 -k $MY_KEYCHAIN_PATH -P $KEYCHAIN_PASSWORD2 -T /usr/bin/codesign
 
         # プロビジョニングファイルをキーチェーンにエクスポート
-        security import youkoso/youkoso.mobileprovision -k $MY_KEYCHAIN_PATH -T /usr/bin/codesign
+        security import youkoso/youkoso.mobileprovision -k $MY_KEYCHAIN_PATH -T Profiles
 
         # 証明書のパスワードを指定
         security set-keychain-password -p $KEYCHAIN_PASSWORD $MY_KEYCHAIN_PATH
