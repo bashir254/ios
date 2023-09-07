@@ -36,7 +36,7 @@ jobs:
       run: gem install fastlane
 
     - name: Create Keychain and Unlock
-      run: fastlane run create_keychain_ios name:MyKeychain password:MyPassword
+      run: fastlane run create_keychain_ios name:app-signing password:MyPassword
       env:
         MY_KEYCHAIN_PATH: $RUNNER_TEMP/app-signing.keychain-db
         KEYCHAIN_PASSWORD: MyPassword # キーチェーンのパスワードを設定
