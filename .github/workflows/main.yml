@@ -49,10 +49,5 @@ jobs:
       run: |
         msbuild youkoso.sln /t:Archive /p:Configuration=Release /p:Platform=iPhone
 
-    - name: Publish iOS App to Artifactory
-      run: |
-        # ビルドされたiOSアプリをArtifactoryにアップロードするスクリプトを実行
-        # このスクリプトはArtifactoryのAPIを使用してアーティファクトをアップロードします
-
     - name: Clean Up Keychain
       run: fastlane delete_keychain name:MyKeychain
