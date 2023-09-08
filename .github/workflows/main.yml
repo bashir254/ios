@@ -58,11 +58,11 @@ jobs:
 
     - name: Build iOS App
       run: |
-        msbuild youkoso.sln /t:Clean,Build /p:Configuration=Release /p:Platform=iPhoneSimulator
+        msbuild youkoso.sln /t:Clean,Build /p:Configuration=Release
 
     - name: Archive iOS App
       run: |
-        msbuild youkoso.sln /t:Archive /p:Configuration=Release /p:Platform=iPhone
+        msbuild youkoso.sln /t:Archive /p:Configuration=Release
 
     - name: Publish files as an artifact
       uses: actions/upload-artifact@v2
