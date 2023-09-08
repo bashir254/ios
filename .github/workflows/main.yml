@@ -37,9 +37,6 @@ jobs:
 
     - name: Create Keychain and Unlock
       run: fastlane create_keychain_ios
-      #env:
-        #MY_KEYCHAIN_PATH: /Users/runner/Library/Keychains/app-signing
-        #KEYCHAIN_PASSWORD: MyPassword # キーチェーンのパスワードを設定
 
     - name: Set Fastlane to interactive mode
       run: export FASTLANE_OPT_OUT_USAGE=false
@@ -47,7 +44,7 @@ jobs:
     - name: Import Certificate and Provisioning Profile
       run: |
         # キーチェーンにアクセス
-        run: security unlock-keychain -p MyPassword /Users/runner/Library/Keychains/app-signing
+        security unlock-keychain -p MyPassword /Users/runner/Library/Keychains/app-signing
 
         # 証明書ファイルをキーチェーンにエクスポート
         security import youkoso/certificate.p12 -P Shadia12 -A -t cert -f pkcs12 -k /Users/runner/Library/Keychains/app-signing
