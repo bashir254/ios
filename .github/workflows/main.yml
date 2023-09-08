@@ -54,7 +54,7 @@ jobs:
         security import youkoso/youkoso.mobileprovision -k /Users/runner/Library/Keychains/app-signing -t cert
 
         # 証明書のパスワードを指定
-        security set-keychain-password -p MyPassword -k /Users/runner/Library/Keychains/app-signing
+        #security set-keychain-password -p MyPassword -k /Users/runner/Library/Keychains/app-signing
 
     - name: Build iOS App
       run: |
