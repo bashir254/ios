@@ -37,10 +37,9 @@ jobs:
 
     - name: Create Keychain and Unlock
       run: fastlane create_keychain_ios
-      env:
+      #env:
         #MY_KEYCHAIN_PATH: /Users/runner/Library/Keychains/app-signing
-        MY_KEYCHAIN_PATH: app-signing
-        KEYCHAIN_PASSWORD: MyPassword # キーチェーンのパスワードを設定
+        #KEYCHAIN_PASSWORD: MyPassword # キーチェーンのパスワードを設定
 
     - name: Set Fastlane to interactive mode
       run: export FASTLANE_OPT_OUT_USAGE=false
@@ -48,16 +47,16 @@ jobs:
     - name: Import Certificate and Provisioning Profile
       run: |
         # キーチェーンにアクセス
-        # security unlock-keychain -p $KEYCHAIN_PASSWORD $MY_KEYCHAIN_PATH
+        # security unlock-keychain -p MyPassword $MY_KEYCHAIN_PATH
 
         # 証明書ファイルをキーチェーンにエクスポート
-        security import youkoso/certificate.p12 -k $MY_KEYCHAIN_PATH -P shadia12 -t cert -f pkcs12
+        security import youkoso/certificate.p12 -k /Users/runner/Library/Keychains/app-signing -P shadia12 -t cert -f pkcs12
 
         # プロビジョニングファイルをキーチェーンにエクスポート
-        security import youkoso/youkoso.mobileprovision -k $MY_KEYCHAIN_PATH -t cert
+        security import youkoso/youkoso.mobileprovision -k /Users/runner/Library/Keychains/app-signing -t cert
 
         # 証明書のパスワードを指定
-        security set-keychain-password -p $KEYCHAIN_PASSWORD $MY_KEYCHAIN_PATH
+        security set-keychain-password -p MyPassword -k /Users/runner/Library/Keychains/app-signing
 
     - name: Build iOS App
       run: |
