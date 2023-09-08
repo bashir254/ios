@@ -57,12 +57,13 @@ jobs:
         #security set-keychain-password -p MyPassword -k /Users/runner/Library/Keychains/app-signing
 
     - name: Build iOS App
-      run: |
-        msbuild youkoso.sln /t:Clean,Build /p:Configuration=Release
+      run: dotnet build youkoso.sln --configuration Release --no-restore /p:TargetFramework=net7.0-ios
+      #run: |
+        #msbuild youkoso.sln /t:Clean,Build /p:Configuration=Release
 
     - name: Archive iOS App
       run: |
-        msbuild youkoso.sln /t:Archive /p:Configuration=Release
+        msbuild youkoso.sln /t:Archive /p:Configuration=Release --no-restore /p:TargetFramework=net7.0-ios
 
     - name: Publish files as an artifact
       uses: actions/upload-artifact@v2
