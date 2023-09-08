@@ -63,7 +63,7 @@ jobs:
 
     - name: Archive iOS App
       run: |
-        msbuild youkoso.sln /t:Archive /p:Configuration=Release --no-restore /p:TargetFramework=net7.0-ios
+        msbuild youkoso.sln /t:Archive /p:Configuration=Release /p:TargetFramework=net7.0-ios
 
     - name: Publish files as an artifact
       uses: actions/upload-artifact@v2
