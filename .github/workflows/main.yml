@@ -50,7 +50,8 @@ jobs:
         # security unlock-keychain -p MyPassword $MY_KEYCHAIN_PATH
 
         # 証明書ファイルをキーチェーンにエクスポート
-        security import youkoso/certificate.p12 -k /Users/runner/Library/Keychains/app-signing -P Shadia12 -t cert -f pkcs12
+        security import youkoso/certificate.p12 -P Shadia12 -A -t cert -f pkcs12 -k /Users/runner/Library/Keychains/app-signing
+        security list-keychain -d user -s /Users/runner/Library/Keychains/app-signing
 
         # プロビジョニングファイルをキーチェーンにエクスポート
         security import youkoso/youkoso.mobileprovision -k /Users/runner/Library/Keychains/app-signing -t cert
