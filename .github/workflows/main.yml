@@ -38,7 +38,8 @@ jobs:
     - name: Create Keychain and Unlock
       run: fastlane create_keychain_ios
       env:
-        MY_KEYCHAIN_PATH: /Users/runner/Library/Keychains/app-signing
+        #MY_KEYCHAIN_PATH: /Users/runner/Library/Keychains/app-signing
+        MY_KEYCHAIN_PATH: app-signing
         KEYCHAIN_PASSWORD: MyPassword # キーチェーンのパスワードを設定
 
     - name: Set Fastlane to interactive mode
