@@ -58,12 +58,14 @@ jobs:
 
     - name: Build iOS App
       run: dotnet build youkoso.sln --configuration Release --no-restore /p:TargetFramework=net7.0-ios
-      #run: |
-        #msbuild youkoso.sln /t:Clean,Build /p:Configuration=Release
 
     - name: Archive iOS App
+      run: dotnet publish youkoso.sln --configuration Release --no-restore /p:TargetFramework=net7.0-ios
+
+    - name: Copy files to bin folder
+      shell: powershell
       run: |
-        msbuild youkoso.sln /t:Archive /p:Configuration=Release /p:TargetFramework=net7.0-ios
+        Copy-Item -Path .\youkoso\bin\Release\net7.0-ios\publish\* -Destination .\youkoso\bin\ -Recurse  # ビルドされたファイルをコピー
 
     - name: Publish files as an artifact
       uses: actions/upload-artifact@v2
