@@ -73,5 +73,5 @@ jobs:
         name: app-release
         path: youkoso\bin\  # アーティファクトとしてアップロードするフォルダのパス
 
-    - name: Clean Up Keychain
-      run: fastlane delete_keychain name:MyKeychain
+    #- name: Clean Up Keychain
+      #run: fastlane delete_keychain name:MyKeychain
