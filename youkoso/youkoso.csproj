@@ -30,7 +30,7 @@
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(TargetFramework)'=='net7.0-ios'">
-	  <CodesignKey>Apple Development: Created via API (M6XQ2Z2NSJ)</CodesignKey>
+	  <CodesignKey>Apple Distribution: Bashir Mohamed (5T7T8K7T9R)</CodesignKey>
 	  <CodesignProvision>VS: com.companyname.youkoso Development</CodesignProvision>
 	</PropertyGroup>
 
