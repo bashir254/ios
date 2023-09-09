@@ -30,8 +30,8 @@
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(TargetFramework)'=='net7.0-ios'">
-	  <CodesignKey>Apple Distribution: Bashir Mohamed (5T7T8K7T9R)</CodesignKey>
-	  <CodesignProvision>VS: com.companyname.youkoso Development</CodesignProvision>
+	  <CodesignKey>certificate.p12</CodesignKey>
+	  <CodesignProvision>youkoso.mobileprovision</CodesignProvision>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(TargetFramework)'=='net7.0-ios'">
