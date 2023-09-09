@@ -65,7 +65,7 @@ jobs:
     - name: Copy files to bin folder
       shell: powershell
       run: |
-        Copy-Item -Path .\youkoso\bin\Release\net7.0-ios\publish\* -Destination .\youkoso\bin\ -Recurse  # ビルドされたファイルをコピー
+        Copy-Item -Path .\youkoso\bin\Release\net7.0-ios\* -Destination .\youkoso\bin\ -Recurse  # ビルドされたファイルをコピー
 
     - name: Publish files as an artifact
       uses: actions/upload-artifact@v2
