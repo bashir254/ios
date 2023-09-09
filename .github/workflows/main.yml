@@ -48,7 +48,6 @@ jobs:
 
         # 証明書ファイルをキーチェーンにエクスポート
         security import youkoso/certificate.p12 -P Youkoso1234 -A -t cert -f pkcs12 -k /Users/runner/Library/Keychains/app-signing
-        #security list-keychain -d user -s /Users/runner/Library/Keychains/app-signing
 
         # プロビジョニングファイルをキーチェーンにエクスポート
         security import youkoso/youkoso.mobileprovision -k /Users/runner/Library/Keychains/app-signing -t cert
@@ -60,7 +59,7 @@ jobs:
       run: dotnet build youkoso.sln --configuration Release --no-restore /p:TargetFramework=net7.0-ios
 
     #- name: Archive iOS App
-      #run: dotnet publish youkoso.sln --configuration Release --no-restore /p:TargetFramework=net7.0-ios -f:net7.0-ios --runtime ios-arm64 --self-contained
+      run: dotnet publish youkoso.sln -f net7.0-ios -c Release -p:ArchiveOnBuild=true -p:RuntimeIdentifier=ios-arm64
 
     - name: Copy files to bin folder
       shell: powershell
