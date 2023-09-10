@@ -61,7 +61,7 @@ jobs:
       run: dotnet build youkoso.sln --configuration Release --no-restore /p:TargetFramework=net7.0-ios
 
     - name: Archive iOS App
-      run: dotnet publish youkoso.sln -f net7.0-ios -c Release -p:ArchiveOnBuild=true -p:RuntimeIdentifier=ios-arm64
+      run: dotnet publish youkoso.sln -f net7.0-ios -c Release
 
     - name: Copy files to bin folder
       shell: powershell
