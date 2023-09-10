@@ -48,10 +48,10 @@ jobs:
         security unlock-keychain -p MyPassword app-signing
 
         # 証明書ファイルをキーチェーンにエクスポート
-        security import youkoso/certificate.cer -A -t cert -k app-signing
+        security import youkoso/certificate.p12 -p Youkoso1234 -A -t cert -f pkcs12 -k app-signing
 
         # プロビジョニングファイルをキーチェーンにエクスポート
-        security import youkoso/youkoso.mobileprovision -k app-signing -t cert
+        security import youkoso/newYoukoso.mobileprovision -k app-signing -t cert
         security set-key-partition-list -S apple-tool:,apple: -s -k MyPassword app-signing
 
         # 証明書のパスワードを指定
