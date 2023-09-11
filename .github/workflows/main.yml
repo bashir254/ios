@@ -25,7 +25,9 @@ jobs:
       run: dotnet restore youkoso.sln
 
     - name: Set MATCH_PASSWORD
-      run: echo "MATCH_PASSWORD=Sudan2020" >> $GITHUB_ENV
+      # 秘密変数からパスワードを取得する
+      with:
+        MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
 
     - name: Setup Ruby
       uses: actions/setup-ruby@v1
