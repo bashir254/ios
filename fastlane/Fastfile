@@ -24,7 +24,7 @@ platform :ios do
 
     # アプリケーションのビルド
     gym(
-      scheme: "your_scheme_name", # アプリケーションのスキーマ名を指定
+      scheme: "com.companyname.youkoso", # アプリケーションのスキーマ名を指定
       export_method: "app-store", # アプリケーションのエクスポート方法を指定
       export_options: {
         uploadBitcode: false,
