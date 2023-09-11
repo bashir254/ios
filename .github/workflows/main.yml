@@ -26,7 +26,7 @@ jobs:
 
     - name: Set MATCH_PASSWORD
       # 秘密変数からパスワードを取得する
-      with:
+      env:
         MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
 
     - name: Setup Ruby
