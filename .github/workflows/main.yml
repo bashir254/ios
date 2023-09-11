@@ -41,7 +41,7 @@ jobs:
     - name: Import Certificate and Provisioning Profile
       run: |
         # キーチェーンにアクセス
-        security default-keychain /Users/runner/Library/Keychains/app-signing
+        security default-keychain -s /Users/runner/Library/Keychains/app-signing
         security unlock-keychain -p MyPassword -k /Users/runner/Library/Keychains/app-signing
 
     - name: Import Certificate and Provisioning Profile
