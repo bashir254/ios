@@ -1,4 +1,4 @@
-name: Build .NET MAUI iOS App
+name: Build .NET MAUI iOS Application
 
 on:
   push:
@@ -24,9 +24,6 @@ jobs:
     - name: Restore NuGet Packages
       run: dotnet restore youkoso.sln
 
-    - name: Build .NET MAUI iOS App
-      run: dotnet build youkoso.sln --configuration Release --no-restore
-
     - name: Setup Ruby
       uses: actions/setup-ruby@v1
       with:
@@ -44,17 +41,16 @@ jobs:
     - name: Import Certificate and Provisioning Profile
       run: |
         # キーチェーンにアクセス
+        security default-keychain -s /Users/runner/Library/Keychains/app-signing
         security unlock-keychain -p MyPassword /Users/runner/Library/Keychains/app-signing
 
+    - name: Import Certificate and Provisioning Profile
+      run: |
         # 証明書ファイルをキーチェーンにエクスポート
         security import youkoso/certificate.p12 -P Youkoso1234 -A -t cert -f pkcs12 -k /Users/runner/Library/Keychains/app-signing
-        #security list-keychain -d user -s /Users/runner/Library/Keychains/app-signing
 
         # プロビジョニングファイルをキーチェーンにエクスポート
         security import youkoso/youkoso.mobileprovision -k /Users/runner/Library/Keychains/app-signing -t cert
-
-        # keychainのパスワードを指定
-        security set-keychain-password -p MyPassword -k /Users/runner/Library/Keychains/app-signing
 
     - name: Run Fastlane
       run: fastlane ios build_and_sign_ios_app
@@ -63,8 +59,12 @@ jobs:
       run: dotnet build youkoso.sln --configuration Release --no-restore /p:TargetFramework=net7.0-ios
 
     - name: Archive iOS App
+      run: dotnet publish youkoso.sln -f net7.0-ios -c Release
+
+    - name: Copy files to bin folder
+      shell: powershell
       run: |
-        msbuild youkoso.sln /t:Archive /p:Configuration=Release /p:TargetFramework=net7.0-ios
+        Copy-Item -Path .\youkoso\bin\Release\net7.0-ios\* -Destination .\youkoso\bin\ -Recurse  # ビルドされたファイルをコピー
 
     - name: Publish files as an artifact
       uses: actions/upload-artifact@v2
@@ -72,5 +72,5 @@ jobs:
         name: app-release
         path: youkoso\bin\  # アーティファクトとしてアップロードするフォルダのパス
 
-    - name: Clean Up Keychain
-      run: fastlane delete_keychain name:MyKeychain
+    #- name: Clean Up Keychain
+      #run: fastlane delete_keychain name:MyKeychain
