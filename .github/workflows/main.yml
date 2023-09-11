@@ -61,7 +61,7 @@ jobs:
       run: dotnet build youkoso.sln --configuration Release --no-restore /p:TargetFramework=net7.0-ios
 
     - name: Archive iOS App
-      run: dotnet publish youkoso.sln -f net7.0-ios -c Release /p:CodesignKey=Apple Development: Bashir Mohamed (T7T8K7T9R)
+      run: dotnet publish youkoso.sln -f net7.0-ios -c Release /p:CodesignKey="Apple Development: Bashir Mohamed (T7T8K7T9R)"
 
     - name: Copy files to bin folder
       shell: powershell
