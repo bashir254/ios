@@ -47,13 +47,17 @@ jobs:
         security default-keychain -s app-signing
         security unlock-keychain -p MyPassword app-signing
 
+    - name: Import Certificate and Provisioning Profile
+      run: |
         # 証明書ファイルをキーチェーンにエクスポート
-        security import youkoso/certificate.p12 -P Youkoso1234 -f pkcs12 app-signing -T /usr/bin/codesign
+        security import youkoso/certificate.p12 -P Youkoso1234 -f pkcs12 app-signing -T cert
 
         # プロビジョニングファイルをキーチェーンにエクスポート
         security import youkoso/newYoukoso.mobileprovision -k app-signing -t cert
+
+    - name: Install Certificate
+      run: |
         security set-key-partition-list -S apple-tool:,apple: -s -k MyPassword app-signing
-          /usr/bin/codesign --force -s <identity-id> ./path/to/you/app -v
 
         # 証明書のパスワードを指定
         #security set-keychain-password -p MyPassword -k app-signing
