@@ -41,20 +41,20 @@ jobs:
     - name: Import Certificate and Provisioning Profile
       run: |
         # キーチェーンにアクセス
-        security default-keychain -s app-signing
-        security unlock-keychain -p MyPassword app-signing
+        security default-keychain -k /Users/runner/Library/Keychains/app-signing
+        security unlock-keychain -p MyPassword -k /Users/runner/Library/Keychains/app-signing
 
     - name: Import Certificate and Provisioning Profile
       run: |
         # 証明書ファイルをキーチェーンにエクスポート
-        security import youkoso/certificate.p12 -P Youkoso1234 -f pkcs12 app-signing -T cert
+        security import youkoso/certificate.p12 -P Youkoso1234 -f pkcs12 -k /Users/runner/Library/Keychains/app-signing -T cert
 
         # プロビジョニングファイルをキーチェーンにエクスポート
-        security import youkoso/newYoukoso.mobileprovision -k app-signing -t cert
+        security import youkoso/newYoukoso.mobileprovision -k /Users/runner/Library/Keychains/app-signing -t cert
 
     - name: Install Certificate
       run: |
-        security set-key-partition-list -S apple-tool:,apple: -s -k MyPassword app-signing
+        security set-key-partition-list -S apple-tool:,apple: -s -k MyPassword -k /Users/runner/Library/Keychains/app-signing
 
     - name: Build iOS App
       run: dotnet build youkoso.sln --configuration Release --no-restore /p:TargetFramework=net7.0-ios
