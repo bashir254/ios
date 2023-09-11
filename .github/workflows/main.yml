@@ -52,9 +52,9 @@ jobs:
         # プロビジョニングファイルをキーチェーンにエクスポート
         security import youkoso/newYoukoso.mobileprovision -k /Users/runner/Library/Keychains/app-signing -t cert
 
-    - name: Install Certificate
-      run: |
-        security set-key-partition-list -S apple-tool:,apple: -s -k MyPassword -k /Users/runner/Library/Keychains/app-signing
+    #- name: Install Certificate
+      #run: |
+        #security set-key-partition-list -S apple-tool:,apple: -s -k MyPassword -k /Users/runner/Library/Keychains/app-signing
 
     - name: Build iOS App
       run: dotnet build youkoso.sln --configuration Release --no-restore /p:TargetFramework=net7.0-ios
