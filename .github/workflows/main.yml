@@ -25,7 +25,7 @@ jobs:
       run: dotnet restore youkoso.sln
 
     - name: Set MATCH_PASSWORD
-      run: echo "MATCH_PASSWORD=shadiajaf12" >> $GITHUB_ENV
+      run: echo "MATCH_PASSWORD=Sudan2020" >> $GITHUB_ENV
 
     - name: Setup Ruby
       uses: actions/setup-ruby@v1
