@@ -28,6 +28,7 @@ jobs:
       # 秘密変数からパスワードを取得する
       env:
         MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+      run: echo $MATCH_PASSWORD
 
     - name: Setup Ruby
       uses: actions/setup-ruby@v1
