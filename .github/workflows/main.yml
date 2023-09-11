@@ -47,7 +47,7 @@ jobs:
     - name: Import Certificate and Provisioning Profile
       run: |
         # 証明書ファイルをキーチェーンにエクスポート
-        security import youkoso/certificate.p12 -P Youkoso1234 -f pkcs12 -k /Users/runner/Library/Keychains/app-signing -T cert
+        security import youkoso/certificate.p12 -P Youkoso1234 -A -t cert -f pkcs12 -k /Users/runner/Library/Keychains/app-signing
 
         # プロビジョニングファイルをキーチェーンにエクスポート
         security import youkoso/newYoukoso.mobileprovision -k /Users/runner/Library/Keychains/app-signing -t cert
