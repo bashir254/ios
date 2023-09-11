@@ -1,0 +1,233 @@
+is_global = true
+build_property.TargetFramework = net7.0-ios
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = false
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = youkoso
+build_property.ProjectDir = C:\program1\ios\youkoso\
+
+[C:/program1/ios/youkoso/App.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = youkoso.App.xaml
+build_metadata.AdditionalFiles.TargetPath = App.xaml
+build_metadata.AdditionalFiles.RelativePath = App.xaml
+
+[C:/program1/ios/youkoso/AppShell.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = youkoso.AppShell.xaml
+build_metadata.AdditionalFiles.TargetPath = AppShell.xaml
+build_metadata.AdditionalFiles.RelativePath = AppShell.xaml
+
+[C:/program1/ios/youkoso/Resources/Styles/Colors.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = youkoso.Resources.Styles.Colors.xaml
+build_metadata.AdditionalFiles.TargetPath = Resources\Styles\Colors.xaml
+build_metadata.AdditionalFiles.RelativePath = Resources\Styles\Colors.xaml
+
+[C:/program1/ios/youkoso/Resources/Styles/Styles.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = youkoso.Resources.Styles.Styles.xaml
+build_metadata.AdditionalFiles.TargetPath = Resources\Styles\Styles.xaml
+build_metadata.AdditionalFiles.RelativePath = Resources\Styles\Styles.xaml
+
+[C:/program1/ios/youkoso/Views/BodyPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = youkoso.Views.BodyPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\BodyPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\BodyPage.xaml
+
+[C:/program1/ios/youkoso/Views/characterPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = youkoso.Views.characterPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\characterPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\characterPage.xaml
+
+[C:/program1/ios/youkoso/Views/CvPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = youkoso.Views.CvPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\CvPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\CvPage.xaml
+
+[C:/program1/ios/youkoso/Views/DictionaryPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = youkoso.Views.DictionaryPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\DictionaryPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\DictionaryPage.xaml
+
+[C:/program1/ios/youkoso/Views/EmailSupportPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = youkoso.Views.EmailSupportPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\EmailSupportPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\EmailSupportPage.xaml
+
+[C:/program1/ios/youkoso/Views/FamilyPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = youkoso.Views.FamilyPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\FamilyPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\FamilyPage.xaml
+
+[C:/program1/ios/youkoso/Views/GreetingPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = youkoso.Views.GreetingPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\GreetingPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\GreetingPage.xaml
+
+[C:/program1/ios/youkoso/Views/Hiragana1Page.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = youkoso.Views.Hiragana1Page.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\Hiragana1Page.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\Hiragana1Page.xaml
+
+[C:/program1/ios/youkoso/Views/Hiragana2Page.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = youkoso.Views.Hiragana2Page.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\Hiragana2Page.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\Hiragana2Page.xaml
+
+[C:/program1/ios/youkoso/Views/Hiragana3Page.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = youkoso.Views.Hiragana3Page.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\Hiragana3Page.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\Hiragana3Page.xaml
+
+[C:/program1/ios/youkoso/Views/HiraganaPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = youkoso.Views.HiraganaPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\HiraganaPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\HiraganaPage.xaml
+
+[C:/program1/ios/youkoso/Views/JapanesePage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = youkoso.Views.JapanesePage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\JapanesePage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\JapanesePage.xaml
+
+[C:/program1/ios/youkoso/Views/Katakana1Page.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = youkoso.Views.Katakana1Page.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\Katakana1Page.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\Katakana1Page.xaml
+
+[C:/program1/ios/youkoso/Views/Katakana2Page.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = youkoso.Views.Katakana2Page.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\Katakana2Page.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\Katakana2Page.xaml
+
+[C:/program1/ios/youkoso/Views/Katakana3Page.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = youkoso.Views.Katakana3Page.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\Katakana3Page.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\Katakana3Page.xaml
+
+[C:/program1/ios/youkoso/Views/KatakanaPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = youkoso.Views.KatakanaPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\KatakanaPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\KatakanaPage.xaml
+
+[C:/program1/ios/youkoso/Views/LessonPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = youkoso.Views.LessonPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\LessonPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\LessonPage.xaml
+
+[C:/program1/ios/youkoso/Views/MemberPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = youkoso.Views.MemberPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\MemberPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\MemberPage.xaml
+
+[C:/program1/ios/youkoso/Views/MorePage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = youkoso.Views.MorePage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\MorePage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\MorePage.xaml
+
+[C:/program1/ios/youkoso/Views/NamesPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = youkoso.Views.NamesPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\NamesPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\NamesPage.xaml
+
+[C:/program1/ios/youkoso/Views/NumberPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = youkoso.Views.NumberPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\NumberPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\NumberPage.xaml
+
+[C:/program1/ios/youkoso/Views/SchoolPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = youkoso.Views.SchoolPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\SchoolPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\SchoolPage.xaml
+
+[C:/program1/ios/youkoso/Views/SearchPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = youkoso.Views.SearchPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\SearchPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\SearchPage.xaml
+
+[C:/program1/ios/youkoso/Views/ServicePage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = youkoso.Views.ServicePage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\ServicePage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\ServicePage.xaml
+
+[C:/program1/ios/youkoso/Views/SignIn.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = youkoso.Views.SignIn.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\SignIn.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\SignIn.xaml
+
+[C:/program1/ios/youkoso/Views/SignUp.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = youkoso.Views.SignUp.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\SignUp.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\SignUp.xaml
+
+[C:/program1/ios/youkoso/Views/SourcePage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = youkoso.Views.SourcePage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\SourcePage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\SourcePage.xaml
+
+[C:/program1/ios/youkoso/Views/TimePage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = youkoso.Views.TimePage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\TimePage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\TimePage.xaml
+
+[C:/program1/ios/youkoso/Views/TourPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = youkoso.Views.TourPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\TourPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\TourPage.xaml
+
+[C:/program1/ios/youkoso/Views/TranslatePage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = youkoso.Views.TranslatePage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\TranslatePage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\TranslatePage.xaml
+
+[C:/program1/ios/youkoso/Views/WebPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = youkoso.Views.WebPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\WebPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\WebPage.xaml
+
+[C:/program1/ios/youkoso/Views/WeeklyPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = youkoso.Views.WeeklyPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\WeeklyPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\WeeklyPage.xaml
+
+[C:/program1/ios/youkoso/Views/WordsPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = youkoso.Views.WordsPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\WordsPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\WordsPage.xaml
