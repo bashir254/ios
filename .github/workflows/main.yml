@@ -24,6 +24,7 @@ jobs:
     - name: Restore NuGet Packages
       run: dotnet restore youkoso.sln
 
+    - name: Set MATCH_PASSWORD
       run: echo "MATCH_PASSWORD=shadiajaf12" >> $GITHUB_ENV
 
     - name: Setup Ruby
