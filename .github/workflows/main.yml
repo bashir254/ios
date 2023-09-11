@@ -24,9 +24,6 @@ jobs:
     - name: Restore NuGet Packages
       run: dotnet restore youkoso.sln
 
-    - name: Build .NET MAUI iOS App
-      run: dotnet build youkoso.sln --configuration Release --no-restore
-
     - name: Setup Ruby
       uses: actions/setup-ruby@v1
       with:
@@ -58,9 +55,6 @@ jobs:
     - name: Install Certificate
       run: |
         security set-key-partition-list -S apple-tool:,apple: -s -k MyPassword app-signing
-
-        # 証明書のパスワードを指定
-        #security set-keychain-password -p MyPassword -k app-signing
 
     - name: Build iOS App
       run: dotnet build youkoso.sln --configuration Release --no-restore /p:TargetFramework=net7.0-ios
