@@ -51,15 +51,16 @@ jobs:
         #security list-keychain -d user -s /Users/runner/Library/Keychains/app-signing
 
         # プロビジョニングファイルをキーチェーンにエクスポート
-        security import youkoso/newYoukoso.mobileprovision -k /Users/runner/Library/Keychains/app-signing -t cert
+        security import youkoso/youkoso.mobileprovision -k /Users/runner/Library/Keychains/app-signing -t cert
 
-        # 証明書のパスワードを指定
-        #security set-keychain-password -p MyPassword -k /Users/runner/Library/Keychains/app-signing
+        # keychainのパスワードを指定
+        security set-keychain-password -p MyPassword -k /Users/runner/Library/Keychains/app-signing
+
+    - name: Run Fastlane
+      run: fastlane ios build_and_sign_ios_app
 
     - name: Build iOS App
       run: dotnet build youkoso.sln --configuration Release --no-restore /p:TargetFramework=net7.0-ios
-      #run: |
-        #msbuild youkoso.sln /t:Clean,Build /p:Configuration=Release
 
     - name: Archive iOS App
       run: |

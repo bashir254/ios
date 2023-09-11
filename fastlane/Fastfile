@@ -13,4 +13,23 @@ platform :ios do
       lock_when_sleeps: false
     )
   end
+
+  lane :build_and_sign_ios_app do
+    # 証明書の適用
+    match(
+      type: "appstore", # 適用する証明書のタイプを指定
+      readonly: true,    # 証明書の読み取り専用設定を有効にする
+      keychain_name: "app-signing" # 使用するキーチェーンの名前を指定
+    )
+
+    # アプリケーションのビルド
+    gym(
+      scheme: "your_scheme_name", # アプリケーションのスキーマ名を指定
+      export_method: "app-store", # アプリケーションのエクスポート方法を指定
+      export_options: {
+        uploadBitcode: false,
+        uploadSymbols: false
+      }
+    )
+  end
 end

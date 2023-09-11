@@ -50,11 +50,10 @@ jobs:
         security import youkoso/certificate.p12 -P Youkoso1234 -A -t cert -f pkcs12 -k /Users/runner/Library/Keychains/app-signing
 
         # プロビジョニングファイルをキーチェーンにエクスポート
-        security import youkoso/newYoukoso.mobileprovision -k /Users/runner/Library/Keychains/app-signing -t cert
+        security import youkoso/youkoso.mobileprovision -k /Users/runner/Library/Keychains/app-signing -t cert
 
-    #- name: Install Certificate
-      #run: |
-        #security set-key-partition-list -S apple-tool:,apple: -s -k MyPassword -k /Users/runner/Library/Keychains/app-signing
+    - name: Run Fastlane
+      run: fastlane ios build_and_sign_ios_app
 
     - name: Build iOS App
       run: dotnet build youkoso.sln --configuration Release --no-restore /p:TargetFramework=net7.0-ios
