@@ -24,12 +24,6 @@ jobs:
     - name: Restore NuGet Packages
       run: dotnet restore youkoso.sln
 
-    - name: Set MATCH_PASSWORD
-      # 秘密変数からパスワードを取得する
-      env:
-        MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
-      run: echo $MATCH_PASSWORD
-
     - name: Setup Ruby
       uses: actions/setup-ruby@v1
       with:
@@ -58,8 +52,10 @@ jobs:
         # プロビジョニングファイルをキーチェーンにエクスポート
         security import youkoso/youkoso.mobileprovision -k /Users/runner/Library/Keychains/app-signing -t cert
 
-    - name: Run Fastlane
-      run: fastlane ios build_and_sign_ios_app
+    - name: Install Certificate and Provisioning Profile
+      run: |
+        # 証明書とプロビジョニングファイルをインストール
+        security set-keychain-settings -t cert -i /Users/runner/Library/Keychains/app-signing -s youkoso.mobileprovision
 
     - name: Build iOS App
       run: dotnet build youkoso.sln --configuration Release --no-restore /p:TargetFramework=net7.0-ios
