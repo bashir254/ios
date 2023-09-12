@@ -55,7 +55,7 @@ jobs:
     - name: Install Certificate and Provisioning Profile
       run: |
         # 証明書とプロビジョニングファイルをインストール
-        security set-keychain-settings -t cert -i /Users/runner/Library/Keychains/app-signing -s youkoso.mobileprovision
+        security set-keychain-settings -t cert -s /Users/runner/Library/Keychains/app-signing -s youkoso.mobileprovision
 
     - name: Build iOS App
       run: dotnet build youkoso.sln --configuration Release --no-restore /p:TargetFramework=net7.0-ios
