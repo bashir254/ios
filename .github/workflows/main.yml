@@ -53,7 +53,7 @@ jobs:
         security import youkoso/youkoso.mobileprovision -k app-signing -t cert
 
     - name: Build iOS App
-      run: dotnet build Youkoso.sln --configuration Release -f net7.0-ios -p:Platform=iPhone -p:Configuration=Release -p:YoukosoCertificatePath=youkoso/certificate.p12 -p:YoukosoCertificatePassword=Youkoso1234 -p:YoukosoMobileProvisionPath=youkoso/youkoso.mobileprovision
+      run: dotnet build Youkoso.sln --configuration Release -f net7.0-ios -p:Configuration=Release -p:YoukosoCertificatePath=youkoso/certificate.p12 -p:YoukosoCertificatePassword=Youkoso1234 -p:YoukosoMobileProvisionPath=youkoso/youkoso.mobileprovision
       #run: dotnet build youkoso.sln --configuration Release --no-restore /p:TargetFramework=net7.0-ios
 
     - name: Archive iOS App
