@@ -32,10 +32,10 @@ jobs:
         # キーチェーンにアクセス
         #echo "$p12_password" | base64 --decode > certificate.p12
         security create-keychain -p "" build.keychain
+        security unlock-keychain -p "" ~/Library/Keychains/build.keychain
         security import youkoso/bashir.p12 -k ~/Library/Keychains/build.keychain -P "$p12_password" -T /usr/bin/codesign
         security import youkoso/youkoso.mobileprovision -k ~/Library/Keychains/build.keychain
         security set-key-partition-list -S apple-tool:,apple: -s -k "" ~/Library/Keychains/build.keychain
-        security unlock-keychain -p "" ~/Library/Keychains/build.keychain
         security list-keychains -s ~/Library/Keychains/build.keychain $(security list-keychains -d user | sed s/\"//g)
 
     - name: Build iOS App
