@@ -9,6 +9,9 @@ jobs:
   build-and-publish-ios:
     runs-on: macos-latest
 
+    env:
+      p12_password: ${{ secrets.p12_password }}
+
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v3
@@ -23,9 +26,6 @@ jobs:
 
     - name: Restore NuGet Packages
       run: dotnet restore youkoso.sln
-
-    env:
-      p12_password: ${{ secrets.p12_password }}
 
     - name: Import Certificate and Provisioning Profile
       run: |
