@@ -56,7 +56,7 @@ jobs:
       run: |
         # 証明書とプロビジョニングファイルをインストール
         security unlock-keychain -p MyPassword app-signing
-        security set-keychain-settings -l -u 3600 app-signing
+        security set-keychain-settings -l - u -t 3600 app-signing
         security import youkoso/certificate.p12 -P Youkoso1234 -A -t cert -f pkcs12 -k app-signing
         security import youkoso/youkoso.mobileprovision -k app-signing -t cert
 
