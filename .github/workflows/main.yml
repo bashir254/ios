@@ -33,8 +33,8 @@ jobs:
         #echo "$p12_password" | base64 --decode > certificate.p12
         security create-keychain -p "" build.keychain
         security unlock-keychain -p "" ~/Library/Keychains/build.keychain
-        #security import youkoso/youkoso.ios.p12 -k ~/Library/Keychains/build.keychain -P $p12_password -T /usr/bin/codesign
-        security import youkoso/youkoso.ios.p12 -P Nagafusacho193 -A -t cert -f pkcs12 -k /Users/runner/Library/Keychains/build.keychain
+        #security import youkoso/certificate.p12 -k ~/Library/Keychains/build.keychain -P $p12_password -T /usr/bin/codesign
+        security import youkoso/certificate.p12 -P Youkoso1234 -A -t cert -f pkcs12 -k /Users/runner/Library/Keychains/build.keychain
         security import youkoso/tikena.mobileprovision -k ~/Library/Keychains/build.keychain
         security set-key-partition-list -S apple-tool:,apple: -s -k "" ~/Library/Keychains/build.keychain
         security list-keychains -s ~/Library/Keychains/build.keychain $(security list-keychains -d user | sed s/\"//g)
