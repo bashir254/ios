@@ -33,10 +33,6 @@
 		<PublishTrimmed>true</PublishTrimmed>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-ios|AnyCPU'">
-	  <MtouchLink>SdkOnly</MtouchLink>
-	</PropertyGroup>
-
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-ios|AnyCPU'">
 	  <MtouchLink>SdkOnly</MtouchLink>
 	</PropertyGroup>
