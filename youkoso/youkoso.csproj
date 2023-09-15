@@ -44,7 +44,6 @@
 <PropertyGroup Condition="$(TargetFramework.Contains('-ios')) and '$(Configuration)' == 'Release'">
 	  <ProvisioningType>automatic</ProvisioningType>
   <RuntimeIdentifier>ios-arm64</RuntimeIdentifier>
-  <CodesignProvision>MyMauiApp</CodesignProvision>
   <ArchiveOnBuild>true</ArchiveOnBuild>
 </PropertyGroup>
 
