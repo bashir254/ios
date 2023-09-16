@@ -57,7 +57,7 @@ jobs:
         cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
 
     - name: Build iOS App
-      run: dotnet build Youkoso.sln --configuration Release -f net7.0-ios
+      run: dotnet build Youkoso.sln --configuration Release -f net7.0-ios -v or --verbose
 
     - name: Archive iOS App
       run: dotnet publish youkoso.sln -f net7.0-ios -c Release
@@ -73,5 +73,3 @@ jobs:
         name: app-release
         path: youkoso\bin\  # アーティファクトとしてアップロードするフォルダのパス
 
-    #- name: Clean Up Keychain
-      #run: fastlane delete_keychain name:MyKeychain
