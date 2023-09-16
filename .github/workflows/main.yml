@@ -27,6 +27,22 @@ jobs:
     - name: Restore NuGet Packages
       run: dotnet restore youkoso.sln
 
+
+    - name: Install Xcode
+      uses: actions/setup-xcode@v2
+      with:
+        xcode-version: '14.3'
+
+    - name: Accept Xcode License
+      run: sudo xcodebuild -license accept
+
+    - name: Set Apple Developer Account
+      run: |
+        echo "machine api.apple.com" >> ~/.netrc
+        echo "  login ${{ secrets.APPLE_ACCOUNT }}" >> ~/.netrc
+        echo "  password ${{ secrets.apple_password }}" >> ~/.netrc
+        chmod 600 ~/.netrc
+
     - name: Install the Apple certificate and provisioning profile
       env:
         BUILD_CERTIFICATE_BASE64: ${{ secrets.BUILD_CERTIFICATE_BASE64 }}
